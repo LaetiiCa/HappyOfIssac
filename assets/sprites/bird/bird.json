@@ -1,0 +1,71 @@
+{"frames":
+[
+  {
+    "filename": "down00",
+    "frame": {"x":252,"y":3,"w":36,"h":40}
+  },
+  {
+    "filename": "down01",
+    "frame": {"x":307,"y":5,"w":76,"h":27}
+  },
+  {
+    "filename": "down02",
+    "frame": {"x":412,"y":2,"w":24,"h":45}
+  },
+  {
+    "filename": "up00",
+    "frame": {"x":250,"y":143,"w":37,"h":48}
+  },
+  {
+    "filename": "up01",
+    "frame": {"x":307,"y":150,"w":78,"h":36}
+  },
+
+  {
+    "filename": "up02",
+    "frame": {"x":412,"y":145,"w":22,"h":47}
+  },
+  {
+    "filename": "left00",
+    "frame": {"x":253,"y":48,"w":39,"h":41}
+  },
+  {
+    "filename": "left01",
+    "frame": {"x":330,"y":58,"w":39,"h":25}
+  },
+  {
+    "filename": "left03",
+    "frame": {"x":408,"y":52,"w":40,"h":41}
+  },
+  {
+    "filename": "right00",
+    "frame": {"x":244,"y":96,"w":39,"h":40}
+  },
+
+  {
+    "filename": "right01",
+    "frame": {"x":321,"y":104,"w":40,"h":26}
+  },
+  {
+    "filename": "right02",
+    "frame": {"x":397,"y":99,"w":40,"h":41}
+  },
+  {
+    "filename": "left02",
+    "frame": {"x":115,"y":80,"w":37,"h":60}
+  },
+  {
+    "filename": "left04",
+    "frame": {"x":153,"y":80,"w":37,"h":60}
+  }
+],
+  "meta": {
+    "app": "http://www.texturepacker.com",
+    "version": "1.0",
+    "image": "issac.png",
+    "format": "RGBA8888",
+    "size": {"w":252,"h":256},
+    "scale": "0.2",
+    "smartupdate": "$TexturePacker:SmartUpdate:fb56f261b1eb04e3215824426595f64c$"
+  }
+}
