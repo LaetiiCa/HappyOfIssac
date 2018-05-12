@@ -1,16 +1,24 @@
 var player = {
 
     /**Set Params */
-    create : function(){
-        this.defaultInput = {'up' : 'z', 'down' : 's', 'left' : 'q', 'right' : 'd'};
-        this.mouv = {up : false, down : false, left : false, right :false }
-        this.allCharacter = [issac, rabbit, snail];        
+    create : function( params ){
+
+        this.defaultInput = {
+         'up' : params.up ? params.up : 'z' ,
+         'down' : params.down ? params.down : 's',
+         'left' : params.left ? params.left : 'q',
+         'right' : params.right ? params.right : 'd',
+         'next' : params.nextCharacter ? params.nextCharacter : 'e',
+         'prev': params.prevCharacter ? params.prevCharacter : 'a'
+        };
+        this.mouv = {up : false, down : false, left : false, right :false };
+        this.allCharacter = [issac, rabbit, snail];
         this.sprite = 0;
+        this.stuff = { arms : null , shoes : null , hat : null };
         this.setCharacter();
-        this.setVelocity(1);
-        this.setArmor(1);
-        this.setLevel(1);
-        this.setLife(3);
+        this.setLevel(params.level ? params.level : 1 );
+        this.setLife(params.life ? params.life : 3 );
+        this.setAllStuff( params.stuff ? params.stuff : {} );
         this.loadSprite();
     },
     setVelocity : function(velocity){
@@ -27,6 +35,20 @@ var player = {
     },
     setLife: function(life){
         this.life = life;
+    },
+    setAllStuff: function( stuff ){
+        this.setArms(stuff.arms ? stuff.arms : null);
+        this.setHat(stuff.hat ? stuff.hat : null);
+        this.setShoes(stuff.shoes ? stuff.shoes : null);
+    },
+    setArms: function( arms ) {
+        this.stuff.arms = arms;
+    },
+    setShoes: function( shoes ) {
+        this.stuff.shoes = shoes;
+    },
+    setHat: function( hat ) {
+        this.stuff.hat = hat;
     },
     loadSprite: function(){
         game.load.atlas('issac', './assets/sprites/issac/issac2.png', './assets/sprites/issac/issac.json');
@@ -127,12 +149,12 @@ var player = {
                 that.mouv.right = true;
                 that.player.body.animations.play('right', 5, true);                
             }
-            if ( e.key === "e"){
+            if ( e.key === that.defaultInput.next ){
                 that.character.killSprite();                
                 that.nextCharacter();
                 that.generateSprite();
             }
-            else if ( e.key === 'a') {
+            else if ( e.key === that.defaultInput.prev ) {
                 that.character.killSprite();                
                 that.prevCharacter();
                 that.generateSprite();
