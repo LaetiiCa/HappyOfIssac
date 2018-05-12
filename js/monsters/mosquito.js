@@ -13,7 +13,7 @@ class mosquito {
         this.sprite.scale.setTo(0.3, 0.3);
     }
     update() {
-        console.log('update mosquito');
+        //console.log('update mosquito');
     }
     attack() {
     }

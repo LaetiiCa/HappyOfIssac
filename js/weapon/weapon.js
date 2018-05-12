@@ -18,7 +18,7 @@ class Weapon {
     }
     checkCollisionMonster(){
         for ( var i = 0; i < game.arrayMonster.length; i++){
-            game.physics.arcade.collide(this.sprite, game.arrayMonster[i].sprite , this.onTouchEnemy(game.arrayMonster[i]));
+            game.physics.arcade.collide(this.sprite, game.arrayMonster[i].sprite);
         }
     }
     checkOutsideWorld (){
