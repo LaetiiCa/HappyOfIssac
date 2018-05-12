@@ -18,6 +18,6 @@ var loadState = {
     },
     loadPerso: function() {
         game.player = player;
-        game.player.create();
+        game.player.create({});
     }
 }
