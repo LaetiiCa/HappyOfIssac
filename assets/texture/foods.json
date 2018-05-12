@@ -1,0 +1,21 @@
+{"frames": 
+    [
+        {
+            "filename": "ball00",
+            "frame": {"x":281,"y":207,"w":16,"h":12}
+        },
+        {
+            "filename": "ice00",
+            "frame": {"x":202,"y":131,"w":16,"h":30}
+        },
+        {
+            "filename": "sprout00",
+            "frame": {"x":268,"y":6,"w":30,"h":25}
+        },
+        {
+            "filename": "candy00",
+            "frame": {"x":235,"y":203,"w":30,"h":24}
+        }
+    ]
+}
+    
