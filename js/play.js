@@ -7,6 +7,12 @@ var playState = {
         game.add.sprite(0,-5,"sol");
         this.player.generateSprite();
         this.player.attachKey();
+        //game.arrayMonster.push(new Alarm());
+        //game.arrayMonster.push(new nightmare());
+        //game.arrayMonster.push(new cat());
+        game.arrayMonster.push(new mosquito());
+        //game.arrayMonster.push(new bird());
+        //game.arrayMonster.push(new phone());
     },
     update : function() {
         this.player.update();
@@ -16,6 +22,6 @@ var playState = {
         this.checkcolition();
     },
     checkcolition : function(){
-    
+
     }
 }
