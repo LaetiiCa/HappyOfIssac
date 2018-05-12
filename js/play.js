@@ -4,8 +4,9 @@ var playState = {
         this.music_theme = game.add.audio('music_theme');
         this.player = game.player;
         this.arrayMonster = [];
-        game.add.sprite(0,0,"sol");
+        game.add.sprite(0,-5,"sol");
         this.player.generateSprite();
+        this.player.attachKey();
     },
     update : function() {
         this.player.update();
