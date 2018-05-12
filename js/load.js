@@ -19,7 +19,9 @@ var loadState = {
     loadPerso: function() {
         game.player = player;
         game.player.create({
-            
+            // stuff : {
+            //     shoes : slipper
+            // }
         });
     }
 }

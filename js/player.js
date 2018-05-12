@@ -48,9 +48,20 @@ var player = {
         this.stuff.arms = arms;
     },
     setShoes: function( shoes ) {
+        if ( shoes == null ){
+            shoes = {
+                velocity : 0,
+            };
+        }
+        console.log(shoes);
         this.stuff.shoes = shoes;
     },
     setHat: function( hat ) {
+        if (hat == null){
+            hat = {
+                armor : 0,
+            }
+        }
         this.stuff.hat = hat;
     },
     loadSprite: function(){
@@ -62,6 +73,12 @@ var player = {
 
 
     /** Gestion de la boucle */
+    getVelocity: function(){
+      return this.velocity + ( this.stuff.shoes.velocity * 100 );  
+    },
+    getArmor: function(){
+        return this.armor + this.stuff.hat.armor;
+    },
     update : function() {
         this.checkMouv();
         this.checkFire();
@@ -71,20 +88,20 @@ var player = {
     },
     checkMouv: function (){
         if ( this.mouv.up ){
-            this.player.body.body.velocity.y = -1 * this.velocity;
+            this.player.body.body.velocity.y = -1 * this.getVelocity();
         }
         else if ( this.mouv.down ){
-            this.player.body.body.velocity.y =  this.velocity;
+            this.player.body.body.velocity.y =  this.getVelocity();
         }
         else {
             this.player.body.body.velocity.y = 0;
         }
 
         if ( this.mouv.left ){
-            this.player.body.body.velocity.x = -1 * this.velocity;
+            this.player.body.body.velocity.x = -1 * this.getVelocity();
         }
         else if ( this.mouv.right ){
-            this.player.body.body.velocity.x = this.velocity;
+            this.player.body.body.velocity.x = this.getVelocity();
         }
         else {
             this.player.body.body.velocity.x = 0;
@@ -223,7 +240,7 @@ var player = {
         delete this.ballShoot[ball.id];
     },
     setDamage: function ( damage ) {
-        this.setLife( this.life - ( damage / this.armor ) )
+        this.setLife( this.life - ( damage / this.getArmor() ) )
     }
     /** End gestion des combats */
 }
