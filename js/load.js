@@ -6,18 +6,20 @@ var loadState = {
         this.loadPerso();
     },
     create: function() {
-        setTimeout(function(){
-            game.state.start('menuStart');            
-        }, 0);
+        game.state.start('menuStart');            
     },
     loadTexture: function(){
         game.load.image('sol', './assets/texture/sol.jpg');
+        game.load.atlas('foods', './assets/texture/foods.png', './assets/texture/foods.json');
+        
     },
     loadSound : function() {
         game.load.audio('music_theme', './assets/sound/music_theme.mp3');        
     },
     loadPerso: function() {
         game.player = player;
-        game.player.create({});
+        game.player.create({
+            
+        });
     }
 }

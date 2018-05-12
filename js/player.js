@@ -15,6 +15,9 @@ var player = {
         this.allCharacter = [issac, rabbit, snail];
         this.sprite = 0;
         this.stuff = { arms : null , shoes : null , hat : null };
+        this.lastFire = new Date();
+        this.timeBetweenTwoShoot = 0.8;
+        this.ballShoot = {};
         this.setCharacter();
         this.setLevel(params.level ? params.level : 1 );
         this.setLife(params.life ? params.life : 3 );
@@ -62,6 +65,9 @@ var player = {
     update : function() {
         this.checkMouv();
         this.checkFire();
+        for ( i in this.ballShoot){
+            this.ballShoot[i].update();
+        }
     },
     checkMouv: function (){
         if ( this.mouv.up ){
@@ -88,15 +94,19 @@ var player = {
         if ( this.player.head != undefined ){
             if ( this.fireDirection.up.isDown ) {
                 this.player.head.animations.play('up' ,1 , false);
+                this.weaponShoot('up');
             }
             else if ( this.fireDirection.down.isDown ) {
                 this.player.head.animations.play('down',1 , false);
+                this.weaponShoot('down');
             }
             else if ( this.fireDirection.left.isDown ) {
                 this.player.head.animations.play('left',1 , false);
+                this.weaponShoot('left');
             }
             else if ( this.fireDirection.right.isDown ) {
                 this.player.head.animations.play('right',1 , false);
+                this.weaponShoot('right');
             }
         }
     },
@@ -104,6 +114,9 @@ var player = {
 
 
     /**Gestion des different character */
+    getPosition: function() {
+        return this.player.body.position;
+    },
     nextCharacter: function() {
         this.sprite++;
         if ( this.sprite >= this.allCharacter.length ){
@@ -111,7 +124,7 @@ var player = {
         }
         this.setCharacter();    
     },
-    prevCharacter: function(){
+    prevCharacter: function() {
         this.sprite--;
         if ( this.sprite < 0 ){
             this.sprite = this.allCharacter.length - 1;
@@ -165,32 +178,61 @@ var player = {
 
             if ( e.key == that.defaultInput.up ){
                 that.mouv.up = false;
-                that.player.body.animations.play('upStatic', 5, true);
+                that.player.body.animations.play('upStatic', that.character.animationsFrames, true);
             }
             if ( e.key == that.defaultInput.down ){
                 that.mouv.down = false;
-                that.player.body.animations.play('downStatic', 5, true);                
+                that.player.body.animations.play('downStatic', that.character.animationsFrames, true);                
             }
             if ( e.key == that.defaultInput.left ){
                 that.mouv.left = false;
-                that.player.body.animations.play('leftStatic', 5, true);          
+                that.player.body.animations.play('leftStatic', that.character.animationsFrames, true);          
             }
             if ( e.key == that.defaultInput.right ){
                 that.mouv.right = false;
-                that.player.body.animations.play('rightStatic', 5, true);          
+                that.player.body.animations.play('rightStatic', that.character.animationsFrames, true);          
             }
         }
         this.fireDirection = game.input.keyboard.createCursorKeys();
     },
-    getPosition: function() {
-        return this.player.body.position;
+
+    /** Gestion de combats */
+    weaponShoot: function( direction ){ 
+        if ( ( new Date() - this.lastFire ) / 1000 > this.timeBetweenTwoShoot ){
+            this.lastFire = new Date();
+
+            if ( this.stuff.arms == 'ice' ){
+                var ball = new ice(direction, this);
+            }
+            else if ( this.stuff.arms == 'sprout' ){
+                var ball = new sprout(direction, this);
+            }
+            else if ( this.stuff.arms == 'candy'){
+                var ball = new candy(direction, this);
+            }
+            else {
+                var ball = new litleBall(direction, this);                  
+            }
+
+            ball.genearteSprite( this.getPosition() );
+            this.ballShoot[ball.id] = ball;
+        }
+    },
+    destroyBallShoot: function( ball ){
+        ball.sprite.kill();
+        delete this.ballShoot[ball.id];
+    },
+    setDamage: function ( damage ) {
+        this.setLife( this.life - ( damage / this.armor ) )
     }
+    /** End gestion des combats */
 }
 
 var issac = {
     name: "issac",
     velocity : 1,
     armor : 1,
+    animationsFrames : 12,
     generateSprite : function( position ){
         this.player = {};
         // Add Body
@@ -226,7 +268,7 @@ var issac = {
         this.player.head.animations.add('left', [23]);
         
 
-        this.player.body.animations.play('rightStatic', 5, true);
+        this.player.body.animations.play('rightStatic', this.animationsFrames, true);
         this.player.head.animations.play('up', 1,false);
         return this.player;
     },
@@ -239,14 +281,16 @@ var rabbit = {
     name: "rabbit",
     velocity : 1.5,
     armor : 0.5,
+    animationsFrames : 12,    
     generateSprite : function( position ){
         this.player = {};
         this.player.body = game.add.sprite(position.x, position.y, this.name);    
         this.player.body.anchor.setTo(0.5, 0.5);
         this.player.body.scale.setTo(1.5, 1.5);
         game.physics.arcade.enable([this.player.body]);
+        this.player.body.body.collideWorldBounds = true;        
         this.player.body.animations.add('downStatic', [0]);
-        this.player.body.animations.play('downStatic', 1, true);
+        this.player.body.animations.play('downStatic', 1, false);
 
         return this.player;
     },
@@ -258,14 +302,16 @@ var snail = {
     name: "snail",
     velocity : 0.5,
     armor : 1.5,
+    animationsFrames : 12,    
     generateSprite : function( position ){
         this.player = {};
         this.player.body = game.add.sprite(position.x, position.y, this.name);        
         this.player.body.anchor.setTo(0.5, 0.5);
         this.player.body.scale.setTo(1, 1);
         game.physics.arcade.enable([this.player.body]);
+        this.player.body.body.collideWorldBounds = true;        
         this.player.body.animations.add('downStatic', [0]);
-        this.player.body.animations.play('downStatic', 1, true);
+        this.player.body.animations.play('downStatic', 1, false);
         return this.player;
     },
     killSprite: function(){
