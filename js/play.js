@@ -3,23 +3,26 @@ var playState = {
         this.keyboard = game.input.keyboard;
         this.music_theme = game.add.audio('music_theme');
         this.player = game.player;
-        game.arrayMonster = [];
+        game.arrayMonster = {};
         game.add.sprite(0,-5,"sol");
         this.player.setLife(3,true);
         this.player.generateSprite();
         this.player.attachKey();
         this.player.drawAll();
         //game.arrayMonster.push(new Alarm());
-        //game.arrayMonster.push(new nightmare());
-        //game.arrayMonster.push(new cat());
+        /*var tmp = new nightmare();
+        game.arrayMonster[tmp.id] = tmp;*/
+        var tmp = new cat();
+        game.arrayMonster[tmp.id] = tmp;
         //game.arrayMonster.push(new mosquito());
-        game.arrayMonster.push(new bird());
+        /*var tmp = new bird();
+        game.arrayMonster[tmp.id] = tmp;*/
         //game.arrayMonster.push(new phone());
     },
     update : function() {
         if (this.player.life > 0 ){
             this.player.update();
-            for(var i = 0; i < game.arrayMonster.length; i++ ){
+            for(var i in game.arrayMonster){
                 game.arrayMonster[i].update();
             }
             this.checkcolition();
@@ -28,4 +31,4 @@ var playState = {
     checkcolition : function(){
 
     }
-}
+};

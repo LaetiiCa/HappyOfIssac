@@ -1,7 +1,7 @@
 class ice extends Weapon {
     constructor ( direction , player ){
         super({
-            velocity : 1,
+            velocity : 1.5,
             direction : direction,
             degat : 1,
             rotationSpeed : 5,
@@ -13,8 +13,8 @@ class ice extends Weapon {
     }
     onTouchEnemy(enemy) {
         console.log('ice', enemy);
-        // enemy.degat(this.degat);
-        // enemy.startBlock();
+        enemy.damageReceived(this.damage);
+        enemy.startBlock();
         this.enemyTouch = enemy;
         this.sprite.kill();
         this.touchTime = new Date();
@@ -32,7 +32,8 @@ class ice extends Weapon {
     updateSpecial(){
         if (this.enemyTouch != false ) {
             if ( (new Date() - this.touchTime) / 1000 > this.timeBonus ){
-                // this.enemyTouch.endBlock();                
+                this.touchTime = new Date();
+                this.enemyTouch.endBlock();
                 this.player.destroyBallShoot(this);
             }
         }

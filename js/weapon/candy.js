@@ -1,7 +1,7 @@
 class candy extends Weapon {
     constructor ( direction , player ){
         super({
-            velocity : 1,
+            velocity : 1.5,
             direction : direction,
             degat : 2,
             rotationSpeed : 4,
