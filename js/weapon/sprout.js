@@ -9,15 +9,13 @@ class sprout extends Weapon {
         this.sprite = null;
         this.player = player;
         this.enemyTouch = false;
-        this.timeBonus = 1;
+        this.timeBonus = 5;
     }
     onTouchEnemy(enemy) {
-        console.log('sprout', enemy);
-        // enemy.degat(this.degat);
         this.enemyTouch = enemy;
         this.sprite.kill();
         this.touchTime = new Date();
-        this.updateWeaponSpecial = true;        
+        this.updateWeaponSpecial = true;
     }
     genearteSprite( position ) {
         this.sprite = game.add.sprite(position.x, this.direction == 'up' ? position.y-50 :position.y, 'foods');
@@ -32,9 +30,10 @@ class sprout extends Weapon {
     updateSpecial(){
         if (this.enemyTouch != false ) {
             if ( (new Date() - this.touchTime) / 1000 > this.timeBonus ){
-                // if( this.enemyTouch.degat(0.1) < 0 ){
-                //     this.player.destroyBallShoot(this);
-                // }
+                this.touchTime = new Date();
+                 if( this.enemyTouch.damageReceived(0.1) < 0 ) {
+                     this.player.destroyBallShoot(this);
+                 }
             }
         }
     }
