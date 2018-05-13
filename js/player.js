@@ -18,7 +18,7 @@ var player = {
         this.lastFire = new Date();
         this.timeBetweenTwoShoot = 0.8;
         this.ballShoot = {};
-        this.direction = 'up';        
+        this.direction = 'up';
         this.setCharacter();
         this.setLevel(params.level ? params.level : 1 );
         this.setLife(params.life ? params.life : 3 );
@@ -39,6 +39,7 @@ var player = {
     },
     setLife: function(life){
         this.life = life;
+        console.log(this.life);
     },
     setAllStuff: function( stuff ){
         this.setArms(stuff.arms ? stuff.arms : null);
@@ -75,7 +76,7 @@ var player = {
 
     /** Gestion de la boucle */
     getVelocity: function(){
-      return this.velocity + ( this.stuff.shoes.velocity * 100 );  
+      return this.velocity + ( this.stuff.shoes.velocity * 100 );
     },
     getArmor: function(){
         return this.armor + this.stuff.hat.armor;
@@ -89,12 +90,12 @@ var player = {
     },
     checkMouv: function (){
         if ( !this.playerFixed ) {
-            var allIsUp = true;            
+            var allIsUp = true;
             if ( this.mouv.up ){
                 this.direction = 'up';
                 allIsUp = false;
                 this.player.body.body.velocity.y = -1 * this.getVelocity();
-                this.player.body.animations.play('up', this.character.animationsFrames, true);                
+                this.player.body.animations.play('up', this.character.animationsFrames, true);
             }
             else if ( this.mouv.down ){
                 this.direction = 'down';
@@ -105,18 +106,18 @@ var player = {
             else {
                 this.player.body.body.velocity.y = 0;
             }
-    
+
             if ( this.mouv.left ){
                 this.direction = 'left';
                 allIsUp = false;
                 this.player.body.body.velocity.x = -1 * this.getVelocity();
-                this.player.body.animations.play('left', this.character.animationsFrames, true);                
+                this.player.body.animations.play('left', this.character.animationsFrames, true);
             }
             else if ( this.mouv.right ){
                 this.direction = 'right';
                 allIsUp = false;
                 this.player.body.body.velocity.x = this.getVelocity();
-                this.player.body.animations.play('right', this.character.animationsFrames, true);                
+                this.player.body.animations.play('right', this.character.animationsFrames, true);
             }
             else {
                 this.player.body.body.velocity.x = 0;
@@ -164,7 +165,7 @@ var player = {
             this.sprite = 0;
         }
         this.generateExplosion();
-        this.setCharacter();    
+        this.setCharacter();
     },
     prevCharacter: function() {
         this.sprite--;
@@ -192,7 +193,7 @@ var player = {
         explosion.anchor.setTo(0.5, 0.5);
         explosion.scale.setTo(1, 1);
         game.physics.arcade.enable([explosion]);
-        
+
         explosion.body.collideWorldBounds = true;
 
         // Down animations
@@ -224,12 +225,12 @@ var player = {
             }
 
             if ( e.key === that.defaultInput.next ){
-                that.character.killSprite();                
+                that.character.killSprite();
                 that.nextCharacter();
                 that.generateSprite();
             }
             else if ( e.key === that.defaultInput.prev ) {
-                that.character.killSprite();                
+                that.character.killSprite();
                 that.prevCharacter();
                 that.generateSprite();
             }
@@ -253,7 +254,7 @@ var player = {
     },
 
     /** Gestion de combats */
-    weaponShoot: function( direction ){ 
+    weaponShoot: function( direction ){
         if ( ( new Date() - this.lastFire ) / 1000 > this.timeBetweenTwoShoot ){
             this.lastFire = new Date();
 
@@ -267,7 +268,7 @@ var player = {
                 var ball = new candy(direction, this);
             }
             else {
-                var ball = new litleBall(direction, this);                  
+                var ball = new litleBall(direction, this);
             }
 
             ball.genearteSprite( this.getPosition() );

@@ -11,8 +11,11 @@ class nightmare {
         this.sprite.animations.add('left', [6,7,8,7]);
         this.sprite.animations.add('right', [9,10,11,10]);
         this.sprite.animations.play('right', 5, true);
-        this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.scale.setTo(1.3, 1.3);
+        game.physics.arcade.enable([this.sprite]);
+        this.sprite.body.checkCollision = true;
+        this.sprite.body.collideWorldBounds = true;
+        this.sprite.anchor.setTo(0.5, 0.5);
 
     }
     update() {

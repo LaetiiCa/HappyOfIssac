@@ -7,19 +7,23 @@ var loadState = {
         this.loadMonster();
     },
     create: function() {
-        game.state.start('menuStart');            
+        game.state.start('menuStart');
     },
     loadTexture: function(){
         game.load.image('sol', './assets/texture/sol.jpg');
         game.load.atlas('foods', './assets/texture/foods.png', './assets/texture/foods.json');
-        game.load.atlas('explosion_blue', './assets/texture/explosion_blue.png', './assets/texture/explosion_blue.json');        
+        game.load.atlas('explosion_blue', './assets/texture/explosion_blue.png', './assets/texture/explosion_blue.json');
     },
     loadSound : function() {
         game.load.audio('music_theme', './assets/sound/music_theme.mp3');
     },
     loadPerso: function() {
         game.player = player;
-        game.player.create({});
+        game.player.create({
+            stuff : {
+                arms : "candy"
+            }
+        });
     },
     loadMonster: function() {
         game.load.atlas('alarm', './assets/sprites/alarm/alarm.png','./assets/sprites/alarm/alarm.json');

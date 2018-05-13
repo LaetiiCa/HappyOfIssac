@@ -10,8 +10,8 @@ var playState = {
         //game.arrayMonster.push(new Alarm());
         //game.arrayMonster.push(new nightmare());
         //game.arrayMonster.push(new cat());
-        game.arrayMonster.push(new mosquito());
-        //game.arrayMonster.push(new bird());
+        //game.arrayMonster.push(new mosquito());
+        game.arrayMonster.push(new bird());
         //game.arrayMonster.push(new phone());
     },
     update : function() {
