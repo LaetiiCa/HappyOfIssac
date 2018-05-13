@@ -5,6 +5,7 @@ class Weapon {
         this.rotationSpeed = params.rotationSpeed;
         this.id = this.idGenerator();
         this.updateWeaponSpecial = false;
+        this.damage = params.degat;
     }
     update(){
         if ( this.sprite != null ) {
@@ -18,7 +19,7 @@ class Weapon {
     }
     checkCollisionMonster(){
         for ( var i = 0; i < game.arrayMonster.length; i++){
-            if (game.physics.arcade.collide(this.sprite, game.arrayMonster[i].sprite)){
+            if(game.physics.arcade.collide(this.sprite, game.arrayMonster[i].sprite)){
                 this.onTouchEnemy(game.arrayMonster[i]);
             }
         }
@@ -39,7 +40,7 @@ class Weapon {
             outsidetheWorld = true;
         }
         if ( outsidetheWorld ){
-            this.player.destroyBallShoot(this);                
+            this.player.destroyBallShoot(this);
         }
     }
     onTouchEnemy(enemy){
@@ -50,16 +51,16 @@ class Weapon {
     }
     setDirection(){
         if ( this.direction == 'up' ) {
-            this.sprite.body.velocity.y = -1 * this.velocity;                
+            this.sprite.body.velocity.y = -1 * this.velocity;
         }
         else if ( this.direction == 'down' ){
-            this.sprite.body.velocity.y = this.velocity;                
+            this.sprite.body.velocity.y = this.velocity;
         }
         else if ( this.direction == 'left' ) {
             this.sprite.body.velocity.x = -1 * this.velocity;
         }
         else if ( this.direction == 'right' ){
-            this.sprite.body.velocity.x = this.velocity;                
+            this.sprite.body.velocity.x = this.velocity;
         }
     }
 }

@@ -7,7 +7,7 @@ var loadState = {
         this.loadMonster();
     },
     create: function() {
-        game.state.start('menuStart');            
+        game.state.start('menuStart');
     },
     loadTexture: function(){
         game.load.image('sol', './assets/texture/sol.jpg');
@@ -20,7 +20,11 @@ var loadState = {
     },
     loadPerso: function() {
         game.player = player;
-        game.player.create({});
+        game.player.create({
+            stuff : {
+                arms : "candy"
+            }
+        });
     },
     loadMonster: function() {
         game.load.atlas('alarm', './assets/sprites/alarm/alarm.png','./assets/sprites/alarm/alarm.json');

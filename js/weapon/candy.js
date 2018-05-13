@@ -10,8 +10,7 @@ class candy extends Weapon {
         this.player = player;
     }
     onTouchEnemy(enemy) {
-        console.log('Candy', enemy);
-        //enemy.degat(this.degat)
+        enemy.damageReceived(this.damage);
         player.destroyBallShoot(this);
     }
     genearteSprite( position ) {
