@@ -11,7 +11,8 @@ class litleBall extends Weapon {
     }
     onTouchEnemy(enemy) {
         console.log('LitleBall', enemy);
-        //enemy.degat(this.degat)        
+        //enemy.degat(this.degat)  
+        player.destroyBallShoot(this);
     }
     genearteSprite( position ) {
         this.sprite = game.add.sprite(position.x, this.direction == 'up' ? position.y-50 :position.y, 'foods');

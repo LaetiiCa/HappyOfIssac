@@ -7,6 +7,7 @@ var playState = {
         game.add.sprite(0,-5,"sol");
         this.player.generateSprite();
         this.player.attachKey();
+        this.player.drawAll();
         //game.arrayMonster.push(new Alarm());
         //game.arrayMonster.push(new nightmare());
         //game.arrayMonster.push(new cat());

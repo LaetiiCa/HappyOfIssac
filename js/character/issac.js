@@ -40,6 +40,9 @@ var issac = {
 
         this.player.body.animations.play(direction + 'Static', this.animationsFrames, true);
         this.player.head.animations.play(direction, 1,false);
+        this.player.head.checkCollision = true;
+        this.player.body.checkCollision = true;
+        
         return this.player;
     },
     killSprite: function(){

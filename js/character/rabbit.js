@@ -28,6 +28,8 @@ var rabbit = {
         this.player.body.animations.add('left', [9, 10 ,11 ]);
 
         this.player.body.animations.play(direction + 'Static', this.animationsFrames, true);        
+        this.player.body.checkCollision = true;
+        
         return this.player;
     },
     killSprite: function(){
