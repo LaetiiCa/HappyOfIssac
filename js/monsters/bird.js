@@ -9,7 +9,7 @@ class bird {
         this.weapons = {};
     }
     create() {
-        this.sprite = game.add.sprite(game.world.centerX, game.world.centerY, this.name);
+        this.sprite = game.add.sprite(10, game.world.centerY, this.name);
         this.sprite.animations.add('up', [3,4,5,4]);
         this.sprite.animations.add('down', [0,1,2,1]);
         this.sprite.animations.add('left', [6,7,8,7]);

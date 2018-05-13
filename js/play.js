@@ -5,6 +5,7 @@ var playState = {
         this.player = game.player;
         game.arrayMonster = [];
         game.add.sprite(0,-5,"sol");
+        this.player.setLife(3,true);
         this.player.generateSprite();
         this.player.attachKey();
         this.player.drawAll();
@@ -16,11 +17,13 @@ var playState = {
         //game.arrayMonster.push(new phone());
     },
     update : function() {
-        this.player.update();
-        for(var i = 0; i < game.arrayMonster.length; i++ ){
-            game.arrayMonster[i].update();
+        if (this.player.life > 0 ){
+            this.player.update();
+            for(var i = 0; i < game.arrayMonster.length; i++ ){
+                game.arrayMonster[i].update();
+            }
+            this.checkcolition();
         }
-        this.checkcolition();
     },
     checkcolition : function(){
 
