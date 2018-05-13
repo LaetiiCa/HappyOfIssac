@@ -99,6 +99,11 @@
         {
             "filename": "headLeft",
             "frame": {"x":249,"y":25,"w":30,"h":30}
+        },
+
+        {
+            "filename": "dead",
+            "frame": {"x":244,"y":825,"w":107,"h":85}
         }
     ],
     "meta": {

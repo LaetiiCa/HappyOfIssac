@@ -47,7 +47,29 @@ var player = {
         if (game.state.current != 'load'){
             this.drawAll();
         }
-        console.log(this.life);
+        if ( this.life <= 0 ){
+            this.playerIdDead();
+        }
+    },
+    playerIdDead(){
+        var textDead = game.add.text(game.world.centerX, 100, "You are wake ...", { font: '70px Arial', fill :'#000'});
+        textDead.anchor.setTo(0.5,0.5);
+        var imDead = game.add.sprite(game.world.centerX, game.world.centerY, 'issac');
+        imDead.anchor.setTo(0.5,0.5);
+        imDead.scale.setTo(2,2);
+        imDead.animations.add('dead', [24]);
+        imDead.animations.play('dead',1,false);
+
+        this.character.killSprite();
+
+        game.add.text(80,game.world.height -80, 'press w to menu', { font: '25px Arial', fill :'#000'});
+
+        var wKey = game.input.keyboard.addKey(87);
+
+        wKey.onDown.addOnce(this.goToMenu, this);
+    },
+    goToMenu : function(){
+        game.state.start('menuStart');
     },
     setAllStuff: function( stuff ){
         this.setArms(stuff.arms ? stuff.arms : null);
@@ -184,6 +206,7 @@ var player = {
             else {
                 this.player.body.body.velocity.x = 0;
                 this.player.body.body.velocity.y = 0;
+
             }
 
             if ( allIsUp ) {
