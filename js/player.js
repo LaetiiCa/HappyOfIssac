@@ -12,16 +12,18 @@ var player = {
          'prev': params.prevCharacter ? params.prevCharacter : 'a'
         };
         this.mouv = {up : false, down : false, left : false, right :false };
+        this.stuff = { arms : null , shoes : null , hat : null };        
         this.allCharacter = [issac, rabbit, snail];
+        this.lifeSprite = null;
         this.sprite = 0;
-        this.stuff = { arms : null , shoes : null , hat : null };
         this.lastFire = new Date();
         this.timeBetweenTwoShoot = 0.8;
         this.ballShoot = {};
         this.direction = 'up';        
         this.setCharacter();
         this.setLevel(params.level ? params.level : 1 );
-        this.setLife(params.life ? params.life : 3 );
+        this.maxLife = 2.50 + (0.5 * this.level);        
+        this.setLife(params.life ? params.life : 3 , true );
         this.setAllStuff( params.stuff ? params.stuff : {} );
         this.loadSprite();
     },
@@ -37,8 +39,14 @@ var player = {
     setArmor: function(armor){
         this.armor = armor;
     },
-    setLife: function(life){
+    setLife: function(life, first){
+        if ( first ){
+            life = this.maxLife;
+        }
         this.life = life;
+        if (game.state.current != 'load'){
+            this.drawAll();
+        }
     },
     setAllStuff: function( stuff ){
         this.setArms(stuff.arms ? stuff.arms : null);
@@ -71,8 +79,59 @@ var player = {
         game.load.atlas('snail', './assets/sprites/snail/snail.png', './assets/sprites/snail/snail.json');
     },
     /** End set params */
+    /** Viewing element */
+    drawLife : function(){
+        if (this.lifeSprite != null){
+            //this.lifeSprite.callAll('kill');    
+            for( var i = 0; i < this.lifeSprite.children.length ; i++){
+                this.lifeSprite.children[i].kill();
+            }
+            this.lifeSprite.children = [];
+            console.log(this.life);
+            console.log(this.lifeSprite.children);
+        }
+        this.lifeSprite =  game.add.group();
+        var tmpCountLife = this.life + 1;
+        for ( var i = 0 ; i < this.maxLife ; i++){
+            tmpCountLife -= 1;
+            var tmp = game.add.sprite((i * 60) + 10 ,10, 'life');
+            tmp.scale.setTo(0.3, 0.3);
+            tmp.animations.add('100', [0]);
+            tmp.animations.add('75', [1]);
+            tmp.animations.add('50', [2]);
+            tmp.animations.add('25', [3]);
+            tmp.animations.add('00', [4]);
+            if ( tmpCountLife >= 1 ){
+                tmp.animations.play('100', 1 , false);
+            }
+            else {
+                if ( tmpCountLife >= 0.75 ){
+                    tmp.animations.play('75', 1 , false);
+                }
+                else if ( tmpCountLife >= 0.50 ){
+                    tmp.animations.play('50', 1 , false);
+                }
+                else if ( tmpCountLife >= 0.1){
+                    tmp.animations.play('25', 1 , false);
+                }
+                else {
+                    tmp.animations.play('00', 1 , false);
+                }
+            }
 
+            this.lifeSprite.add(tmp);
+        }      
+        
+    },
+    drawChara: function(){
 
+    },
+    drawStuff: function(){
+
+    },
+    drawAll : function(){
+        this.drawLife();
+    },
     /** Gestion de la boucle */
     getVelocity: function(){
       return this.velocity + ( this.stuff.shoes.velocity * 100 );  
@@ -81,6 +140,7 @@ var player = {
         return this.armor + this.stuff.hat.armor;
     },
     update : function() {
+        game.world.bringToTop(this.lifeSprite);
         this.checkMouv();
         this.checkFire();
         for ( i in this.ballShoot){
@@ -94,32 +154,35 @@ var player = {
                 this.direction = 'up';
                 allIsUp = false;
                 this.player.body.body.velocity.y = -1 * this.getVelocity();
-                this.player.body.animations.play('up', this.character.animationsFrames, true);                
+                this.player.body.animations.play('up', this.character.animationsFrames, true);
+                this.player.body.body.velocity.x = 0;
+                
             }
             else if ( this.mouv.down ){
                 this.direction = 'down';
                 allIsUp = false;
                 this.player.body.body.velocity.y =  this.getVelocity();
                 this.player.body.animations.play('down', this.character.animationsFrames, true);
+                this.player.body.body.velocity.x = 0;
+                
             }
-            else {
-                this.player.body.body.velocity.y = 0;
-            }
-    
-            if ( this.mouv.left ){
+            else if ( this.mouv.left ){
                 this.direction = 'left';
                 allIsUp = false;
                 this.player.body.body.velocity.x = -1 * this.getVelocity();
-                this.player.body.animations.play('left', this.character.animationsFrames, true);                
+                this.player.body.animations.play('left', this.character.animationsFrames, true);       
+                this.player.body.body.velocity.y = 0;
             }
             else if ( this.mouv.right ){
                 this.direction = 'right';
                 allIsUp = false;
                 this.player.body.body.velocity.x = this.getVelocity();
-                this.player.body.animations.play('right', this.character.animationsFrames, true);                
+                this.player.body.animations.play('right', this.character.animationsFrames, true);
+                this.player.body.body.velocity.y = 0;
             }
             else {
                 this.player.body.body.velocity.x = 0;
+                this.player.body.body.velocity.y = 0;
             }
 
             if ( allIsUp ) {
@@ -224,12 +287,12 @@ var player = {
             }
 
             if ( e.key === that.defaultInput.next ){
-                that.character.killSprite();                
+                that.character.killSprite()
                 that.nextCharacter();
                 that.generateSprite();
             }
             else if ( e.key === that.defaultInput.prev ) {
-                that.character.killSprite();                
+                that.character.killSprite()
                 that.prevCharacter();
                 that.generateSprite();
             }
@@ -267,7 +330,7 @@ var player = {
                 var ball = new candy(direction, this);
             }
             else {
-                var ball = new litleBall(direction, this);                  
+                var ball = new litleBall(direction, this);
             }
 
             ball.genearteSprite( this.getPosition() );

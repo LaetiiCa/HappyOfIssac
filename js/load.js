@@ -12,6 +12,7 @@ var loadState = {
     loadTexture: function(){
         game.load.image('sol', './assets/texture/sol.jpg');
         game.load.atlas('foods', './assets/texture/foods.png', './assets/texture/foods.json');
+        game.load.atlas('life', './assets/texture/life.png', './assets/texture/life.json');
         game.load.atlas('explosion_blue', './assets/texture/explosion_blue.png', './assets/texture/explosion_blue.json');        
     },
     loadSound : function() {
