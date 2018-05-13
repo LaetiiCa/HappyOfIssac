@@ -14,7 +14,7 @@ var issac = {
         this.player.head.anchor.setTo(0.5, 0.5);
         this.player.head.scale.setTo(1, 1);
         game.physics.arcade.enable([this.player.body, this.player.head]);
-        
+
         this.player.body.body.collideWorldBounds = true;
 
         // Down animations
@@ -26,18 +26,20 @@ var issac = {
         this.player.body.animations.add('up', [5,6,7,8,9]);
         this.player.body.animations.add('upStatic', [5]);
         this.player.head.animations.add('up', [22]);
-        
+
         // Right animations
         this.player.body.animations.add('right', [10,11,12,13,14]);
         this.player.body.animations.add('rightStatic', [10]);
         this.player.head.animations.add('right', [21]);
-        
+
         // Left animations
         this.player.body.animations.add('left', [15,16,17,18,19]);
         this.player.body.animations.add('leftStatic', [15]);
         this.player.head.animations.add('left', [23]);
-        
 
+
+        this.player.body.checkCollision = true;
+        this.player.head.checkCollision = true;
         this.player.body.animations.play(direction + 'Static', this.animationsFrames, true);
         this.player.head.animations.play(direction, 1,false);
         this.player.head.checkCollision = true;

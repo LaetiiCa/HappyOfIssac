@@ -19,7 +19,7 @@ var player = {
         this.lastFire = new Date();
         this.timeBetweenTwoShoot = 0.8;
         this.ballShoot = {};
-        this.direction = 'up';        
+        this.direction = 'up';
         this.setCharacter();
         this.setLevel(params.level ? params.level : 1 );
         this.maxLife = 2.50 + (0.5 * this.level);        
@@ -47,6 +47,7 @@ var player = {
         if (game.state.current != 'load'){
             this.drawAll();
         }
+        console.log(this.life);
     },
     setAllStuff: function( stuff ){
         this.setArms(stuff.arms ? stuff.arms : null);
@@ -134,7 +135,7 @@ var player = {
     },
     /** Gestion de la boucle */
     getVelocity: function(){
-      return this.velocity + ( this.stuff.shoes.velocity * 100 );  
+      return this.velocity + ( this.stuff.shoes.velocity * 100 );
     },
     getArmor: function(){
         return this.armor + this.stuff.hat.armor;
@@ -149,7 +150,7 @@ var player = {
     },
     checkMouv: function (){
         if ( !this.playerFixed ) {
-            var allIsUp = true;            
+            var allIsUp = true;
             if ( this.mouv.up ){
                 this.direction = 'up';
                 allIsUp = false;
@@ -227,7 +228,7 @@ var player = {
             this.sprite = 0;
         }
         this.generateExplosion();
-        this.setCharacter();    
+        this.setCharacter();
     },
     prevCharacter: function() {
         this.sprite--;
@@ -255,7 +256,7 @@ var player = {
         explosion.anchor.setTo(0.5, 0.5);
         explosion.scale.setTo(1, 1);
         game.physics.arcade.enable([explosion]);
-        
+
         explosion.body.collideWorldBounds = true;
 
         // Down animations
@@ -316,7 +317,7 @@ var player = {
     },
 
     /** Gestion de combats */
-    weaponShoot: function( direction ){ 
+    weaponShoot: function( direction ){
         if ( ( new Date() - this.lastFire ) / 1000 > this.timeBetweenTwoShoot ){
             this.lastFire = new Date();
 
