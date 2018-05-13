@@ -12,17 +12,17 @@ var player = {
          'prev': params.prevCharacter ? params.prevCharacter : 'a'
         };
         this.mouv = {up : false, down : false, left : false, right :false };
-        this.stuff = { arms : null , shoes : null , hat : null };        
+        this.stuff = { arms : null , shoes : null , hat : null };
         this.allCharacter = [issac, rabbit, snail];
         this.lifeSprite = null;
         this.sprite = 0;
         this.lastFire = new Date();
-        this.timeBetweenTwoShoot = 0.8;
+        this.timeBetweenTwoShoot = 0.5;
         this.ballShoot = {};
         this.direction = 'up';
         this.setCharacter();
         this.setLevel(params.level ? params.level : 1 );
-        this.maxLife = 2.50 + (0.5 * this.level);        
+        this.maxLife = 2.50 + (0.5 * this.level);
         this.setLife(params.life ? params.life : 3 , true );
         this.setAllStuff( params.stuff ? params.stuff : {} );
         this.loadSprite();
@@ -51,7 +51,7 @@ var player = {
             this.playerIdDead();
         }
     },
-    playerIdDead(){
+    playerIdDead: function(){
         var textDead = game.add.text(game.world.centerX, 100, "You are wake ...", { font: '70px Arial', fill :'#000'});
         textDead.anchor.setTo(0.5,0.5);
         var imDead = game.add.sprite(game.world.centerX, game.world.centerY, 'issac');
@@ -105,13 +105,11 @@ var player = {
     /** Viewing element */
     drawLife : function(){
         if (this.lifeSprite != null){
-            //this.lifeSprite.callAll('kill');    
+            //this.lifeSprite.callAll('kill');
             for( var i = 0; i < this.lifeSprite.children.length ; i++){
                 this.lifeSprite.children[i].kill();
             }
             this.lifeSprite.children = [];
-            console.log(this.life);
-            console.log(this.lifeSprite.children);
         }
         this.lifeSprite =  game.add.group();
         var tmpCountLife = this.life + 1;
@@ -143,8 +141,8 @@ var player = {
             }
 
             this.lifeSprite.add(tmp);
-        }      
-        
+        }
+
     },
     drawChara: function(){
 
@@ -179,7 +177,7 @@ var player = {
                 this.player.body.body.velocity.y = -1 * this.getVelocity();
                 this.player.body.animations.play('up', this.character.animationsFrames, true);
                 this.player.body.body.velocity.x = 0;
-                
+
             }
             else if ( this.mouv.down ){
                 this.direction = 'down';
@@ -187,13 +185,13 @@ var player = {
                 this.player.body.body.velocity.y =  this.getVelocity();
                 this.player.body.animations.play('down', this.character.animationsFrames, true);
                 this.player.body.body.velocity.x = 0;
-                
+
             }
             else if ( this.mouv.left ){
                 this.direction = 'left';
                 allIsUp = false;
                 this.player.body.body.velocity.x = -1 * this.getVelocity();
-                this.player.body.animations.play('left', this.character.animationsFrames, true);       
+                this.player.body.animations.play('left', this.character.animationsFrames, true);
                 this.player.body.body.velocity.y = 0;
             }
             else if ( this.mouv.right ){
