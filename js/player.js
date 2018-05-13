@@ -51,7 +51,7 @@ var player = {
             this.playerIdDead();
         }
     },
-    playerIdDead(){
+    playerIdDead: function (){
         var textDead = game.add.text(game.world.centerX, 100, "You are wake ...", { font: '70px Arial', fill :'#000'});
         textDead.anchor.setTo(0.5,0.5);
         var imDead = game.add.sprite(game.world.centerX, game.world.centerY, 'issac');
@@ -60,7 +60,13 @@ var player = {
         imDead.animations.add('dead', [24]);
         imDead.animations.play('dead',1,false);
 
-        this.character.killSprite();
+        for ( var i in this.ballShoot ){
+            this.destroyBallShoot(this.ballShoot[i]);
+        }
+        for ( var i in this.allCharacter){
+            this.allCharacter[i].killSprite();
+        }
+        this.player = undefined;
 
         game.add.text(80,game.world.height -80, 'press w to menu', { font: '25px Arial', fill :'#000'});
 
@@ -85,7 +91,6 @@ var player = {
                 velocity : 0,
             };
         }
-        console.log(shoes);
         this.stuff.shoes = shoes;
     },
     setHat: function( hat ) {
@@ -110,8 +115,6 @@ var player = {
                 this.lifeSprite.children[i].kill();
             }
             this.lifeSprite.children = [];
-            console.log(this.life);
-            console.log(this.lifeSprite.children);
         }
         this.lifeSprite =  game.add.group();
         var tmpCountLife = this.life + 1;
@@ -297,25 +300,25 @@ var player = {
     attachKey : function(){
         var that = this;
         game.input.keyboard.onDownCallback = function(e){
-            if ( e.key == that.defaultInput.up ){
+            if ( e.key.toLowerCase() == that.defaultInput.up ){
                 that.mouv.up = true;
             }
-            if ( e.key == that.defaultInput.down ){
+            if ( e.key.toLowerCase() == that.defaultInput.down ){
                 that.mouv.down = true;
             }
-            if ( e.key == that.defaultInput.left ){
+            if ( e.key.toLowerCase() == that.defaultInput.left ){
                 that.mouv.left = true;
             }
-            if ( e.key == that.defaultInput.right ){
+            if ( e.key.toLowerCase() == that.defaultInput.right ){
                 that.mouv.right = true;
             }
 
-            if ( e.key === that.defaultInput.next ){
+            if ( e.key.toLowerCase() === that.defaultInput.next ){
                 that.character.killSprite()
                 that.nextCharacter();
                 that.generateSprite();
             }
-            else if ( e.key === that.defaultInput.prev ) {
+            else if ( e.key.toLowerCase() === that.defaultInput.prev ) {
                 that.character.killSprite()
                 that.prevCharacter();
                 that.generateSprite();
@@ -323,16 +326,16 @@ var player = {
         }
 
         game.input.keyboard.onUpCallback = function(e){
-            if ( e.key == that.defaultInput.up ){
+            if ( e.key.toLowerCase() == that.defaultInput.up ){
                 that.mouv.up = false;
             }
-            if ( e.key == that.defaultInput.down ){
+            if ( e.key.toLowerCase() == that.defaultInput.down ){
                 that.mouv.down = false;
             }
-            if ( e.key == that.defaultInput.left ){
+            if ( e.key.toLowerCase() == that.defaultInput.left ){
                 that.mouv.left = false;
             }
-            if ( e.key == that.defaultInput.right ){
+            if ( e.key.toLowerCase() == that.defaultInput.right ){
                 that.mouv.right = false;
             }
         }
@@ -362,6 +365,7 @@ var player = {
         }
     },
     destroyBallShoot: function( ball ){
+        ball.sprite.animations.stop(null,true);
         ball.sprite.kill();
         delete this.ballShoot[ball.id];
     },
