@@ -64,7 +64,9 @@ var player = {
             this.destroyBallShoot(this.ballShoot[i]);
         }
         for ( var i in this.allCharacter){
-            this.allCharacter[i].killSprite();
+            if (this.allCharacter[i].player !== undefined ){
+                this.allCharacter[i].killSprite();
+            }
         }
         this.player = undefined;
 

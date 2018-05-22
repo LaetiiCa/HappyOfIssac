@@ -1,11 +1,11 @@
 class cat extends monster {
 
-    constructor()  {
+    constructor() {
         super({
             name : 'cat',
             damage : 0.1,
             life : 6
-        })
+        });
         this.inAttack = false;
     }
     create() {
