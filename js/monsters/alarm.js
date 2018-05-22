@@ -1,8 +1,11 @@
-class Alarm {
+class Alarm extends monster {
 
     constructor() {
-        this.name = 'alarm';
-        this.create();
+        super({
+            name : 'alarm',
+            damage : 0.6,
+            life : 6
+        })
     }
     create() {
         this.sprite = game.add.sprite(game.world.centerX, game.world.centerY, this.name);
@@ -14,7 +17,8 @@ class Alarm {
         this.sprite.body.collideWorldBounds = true;
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.body.bounce.setTo(1,1);
-        /*var tmpX = Math.random();
+
+        var tmpX = Math.random();
         var tmpY = Math.random();
         console.log(tmpX);
         if (tmpX > 0.5 ) {
@@ -27,21 +31,23 @@ class Alarm {
         } else {
             this.sprite.body.velocity.y = -100;
         }
-        console.log(this.sprite.body.velocity);*/
-        console.log(player.sprite);
-        game.physics.arcade.moveToObject(this.sprite, player.player.body.body,80);
-
     }
     update() {
-        var tmpX = this.sprite.body.position.x  - player.player.body.body.position.x;
-        var tmpY = this.sprite.body.position.y  - player.player.body.body.position.y;
-        if ( tmpX > -80 && tmpX < 80 && tmpY > -80 && tmpY < 80){
-            this.sprite.body.velocity.x= 0;
-            this.sprite.body.velocity.y= 0;
-        }
-        console.log( )
-        console.log('update alarm');
+        this.checkAttack();
     }
-    attack() {
+    checkAttack(){
+        if((new Date() - this.lastAttack) / 1000 > 5) {
+            this.sprite.scale.setTo(0.7,0.7);
+                if (game.physics.arcade.collide(this.sprite, player.player.body) || game.physics.arcade.collide(this.sprite,player.player.head)) {
+                    player.setDamage(this.damage);
+                    console.log('Salut');
+                    console.log(this.damage);
+                }
+            console.log('ATTACK');
+        }
+        if((new Date() - this.lastAttack) / 1000 > 6.5) {
+            this.sprite.scale.setTo(0.3, 0.3);
+            this.lastAttack = new Date();
+        }
     }
 }

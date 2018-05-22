@@ -9,15 +9,18 @@ var playState = {
         this.player.generateSprite();
         this.player.attachKey();
         this.player.drawAll();
-        //game.arrayMonster.push(new Alarm());
+        /*var tmp = new Alarm();
+        game.arrayMonster[tmp.id] = tmp;
         /*var tmp = new nightmare();
         game.arrayMonster[tmp.id] = tmp;*/
-        var tmp = new cat();
+        /*var tmp = new cat();
+        game.arrayMonster[tmp.id] = tmp;*/
+        var tmp = new mosquito();
         game.arrayMonster[tmp.id] = tmp;
-        //game.arrayMonster.push(new mosquito());
         /*var tmp = new bird();
         game.arrayMonster[tmp.id] = tmp;*/
-        //game.arrayMonster.push(new phone());
+        /*var tmp = new phone();
+        game.arrayMonster[tmp.id] = tmp;*/
     },
     update : function() {
         if (this.player.life > 0 ){
