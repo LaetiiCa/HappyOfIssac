@@ -149,7 +149,7 @@ var player = {
 
             this.lifeSprite.add(tmp);
         }
-
+        this.lifeSprite.fixedToCamera = true;
     },
     drawChara: function(){
 
@@ -174,6 +174,7 @@ var player = {
         for ( i in this.ballShoot){
             this.ballShoot[i].update();
         }
+        this.map.update();
     },
     checkMouv: function (){
         if ( !this.playerFixed ) {
@@ -268,14 +269,29 @@ var player = {
     },
     generateSprite: function(){
         if ( this.player == undefined ){
-            var position = {x : game.world.centerX, y : game.world.centerY};
+            //this.map.makeMap();
+            // this.map.renderMap();
+            //console.log(this.map.map[][0]);
+            //game.physics.arcade.enable([this.map.map[1][1]]);
+            var position = {x : 100, y : 100};
+            //this.goToMap(this.map.map[0][0]);
         }
         else {
             var position = this.getPosition();
         }
         this.player = this.character.generateSprite(position, this.direction);
+      
+      //  game.camera.follow(this.player.body);
+        this.map = new Map();      
         this.setArmor(this.character.armor);
         this.setVelocity(this.character.velocity);
+    },
+    goToMap: function(map){
+        console.log(game.width);
+        game.camera.position = {
+            x : map.position.x + 10 ,
+            y : map.position.y +10,
+        };
     },
     generateExplosion: function(){
         this.playerFixed = true;
@@ -285,7 +301,7 @@ var player = {
         explosion.scale.setTo(1, 1);
         game.physics.arcade.enable([explosion]);
 
-        explosion.body.collideWorldBounds = true;
+        //explosion.body.collideWorldBounds = true;
 
         // Down animations
         explosion.animations.add('down', [0,1,2,3,4]);

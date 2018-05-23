@@ -39,7 +39,6 @@ class cat extends monster {
         }
     }
     checkAttack() {
-        console.log((new Date() - this.lastAttack) / 1000);
         if ((new Date() - this.lastAttack) / 1000 > 3) {
             if (game.physics.arcade.collide(this.sprite, player.player.body) || game.physics.arcade.collide(this.sprite,player.player.head)) {
                 player.setDamage(this.damage);

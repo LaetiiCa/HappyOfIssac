@@ -10,7 +10,10 @@ var loadState = {
         game.state.start('menuStart');
     },
     loadTexture: function(){
-        game.load.image('sol', './assets/texture/sol.jpg');
+        game.load.image('sol', './assets/texture/sol.png');
+        game.load.image('floor', './assets/texture/blanc.png');
+        game.load.image('nuage', './assets/texture/nuage.png');
+        game.load.image('porte', './assets/texture/porte.png');
         game.load.atlas('foods', './assets/texture/foods.png', './assets/texture/foods.json');
         game.load.atlas('life', './assets/texture/life.png', './assets/texture/life.json');
         game.load.atlas('explosion_blue', './assets/texture/explosion_blue.png', './assets/texture/explosion.json');
