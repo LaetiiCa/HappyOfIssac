@@ -39,8 +39,6 @@ class Alarm {
             this.sprite.body.velocity.x= 0;
             this.sprite.body.velocity.y= 0;
         }
-        console.log( )
-        console.log('update alarm');
     }
     attack() {
     }
