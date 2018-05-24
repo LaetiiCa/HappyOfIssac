@@ -189,6 +189,11 @@ var player = {
     drawChara: function(){
 
     },
+    drawKill(){
+        this.monsterKill++;
+        this.monsterKillSprite.kill()
+        this.monsterKillSprite= game.add.text(game.width - 50 ,50, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
+    },
     drawStuff: function(){
 
     },
