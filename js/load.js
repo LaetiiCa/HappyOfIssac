@@ -16,6 +16,7 @@ var loadState = {
         game.load.image('nuage', './assets/texture/nuage.png');
         game.load.image('porte', './assets/texture/porte.png');
         game.load.atlas('foods', './assets/texture/foods.png', './assets/texture/foods.json');
+        game.load.atlas('foods2', './assets/texture/foods2.png', './assets/texture/foods.json');
         game.load.atlas('life', './assets/texture/life.png', './assets/texture/life.json');
         game.load.atlas('explosion_blue', './assets/texture/explosion_blue.png', './assets/texture/explosion.json');
         game.load.atlas('explosion', './assets/texture/explosion_lit.png', './assets/texture/explosion.json');

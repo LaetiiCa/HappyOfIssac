@@ -28,7 +28,7 @@ class monster {
     attack() {
         var tmp = new weaponDistance(player, {
             damage: this.damage,
-            sprite: 'foods',
+            sprite: 'foods2',
             position: this.sprite.body.position,
             velocity: 1
         }, this);

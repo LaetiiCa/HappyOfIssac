@@ -114,6 +114,7 @@ var player = {
         game.state.start('menuStart');
     },
     setAllStuff: function( stuff ){
+        console.log(stuff);
         this.setArms(stuff.arms ? stuff.arms : null);
         this.setHat(stuff.hat ? stuff.hat : null);
         this.setShoes(stuff.shoes ? stuff.shoes : null);
@@ -184,11 +185,6 @@ var player = {
             this.lifeSprite.add(tmp);
         }
         this.lifeSprite.fixedToCamera = true;
-    },
-    drawKill(){
-        this.monsterKill++;
-        this.monsterKillSprite.kill()
-        this.monsterKillSprite= game.add.text(game.width - 70 ,70, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
     },
     drawChara: function(){
 
