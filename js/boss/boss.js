@@ -87,4 +87,7 @@ class boss {
         game.killBoss(this.id);
         this.sprite.destroy();
     }
+    generateInt(max){
+        return Math.floor(Math.random() * max);
+    }
 }

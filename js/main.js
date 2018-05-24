@@ -12,13 +12,13 @@ game.killBoss = function(id){
     delete game.arrayBoss[id];
 };
 game.killAll = function(){
-    for(var i = 0 ; i < game.arrayBoss.length;i++){
+    for(var i in  game.arrayBoss){
         game.arrayBoss[i].sprite.kill();
         game.killBoss(game.arrayBoss[i].id);
     }
-    for(var i = 0 ; i < game.arrayMonster.length;i++){
+    for(var i in  game.arrayMonster){
+        console.log(game.arrayMonster[i]);
         game.arrayMonster[i].sprite.kill();
-
 
         game.killMonster(game.arrayMonster[i].id);
     }

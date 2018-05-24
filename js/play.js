@@ -22,6 +22,8 @@ var playState = {
         // var tmp = new bird();
         // game.arrayMonster[tmp.id] = tmp;
         //game.arrayMonster.push(new phone());
+        var tmp = new babySister();
+        game.arrayBoss[tmp.id] = tmp;
     },
     update : function() {
         if (this.player.life > 0 ){
