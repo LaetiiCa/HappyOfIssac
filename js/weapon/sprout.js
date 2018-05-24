@@ -3,7 +3,7 @@ class sprout extends Weapon {
         super({
             velocity : 3,
             direction : direction,
-            degat : 1,
+            degat : 2,
             rotationSpeed : 7,
         })
         this.sprite = null;

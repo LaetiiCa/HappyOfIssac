@@ -274,6 +274,12 @@ class room {
                     var tmp = new grandmother();
                     game.arrayBoss[tmp.id] = tmp;
                     break;
+                case 5 : 
+                    var tmp = new mother();
+                    game.arrayBoss[tmp.id] = tmp;
+                    var tmp = new father();
+                    game.arrayBoss[tmp.id] = tmp;
+                    break;
                 
             }
         }

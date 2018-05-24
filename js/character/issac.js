@@ -1,6 +1,6 @@
 var issac = {
     name: "issac",
-    velocity : 1,
+    velocity : 1.5,
     armor : 1,
     animationsFrames : 12,
     generateSprite : function( position, direction ){

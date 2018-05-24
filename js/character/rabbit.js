@@ -1,6 +1,6 @@
 var rabbit = {
     name: "rabbit",
-    velocity : 1.5,
+    velocity : 2,
     armor : 0.5,
     animationsFrames : 8,
     generateSprite : function( position, direction ){
