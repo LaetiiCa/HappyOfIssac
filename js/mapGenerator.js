@@ -13,34 +13,48 @@ class Map {
             right : false,
             right : false,
         }
-        this.nextMap(this.allRooms[0][0]);
-    }  
+        this.nextMap(this.allRooms[this.generateInt(2)][this.generateInt(2)]);
+    }
+    generateInt(max){
+        return Math.floor(Math.random() * max);
+    }
     generateAllRooms(){
         for( var y = 0; y < 3 ; y++){
             var linge = [];
-            for( var x =0; x < 3; x++){
+            for( var x = 0; x < 3; x++){
                 linge.push(new room(x,y));
             }
             this.allRooms.push(linge);
         }
+        this.checkIsPosible();
+    }
+    checkIsPosible (){
+        for( var y = 0; y < this.allRooms.length; y++){
+            for(var x = 0; x < this.allRooms[y].length; x++){
+                
+            }
+        } 
     }
 
     nextMap(map){
-        this.actualRoom = map;
-        this.murs.map( mur =>{
-            mur.kill();
-            mur = null;
-            return mur;
-        });
-        this.murs = [];
-        this.porte = {
-            up : false,
-            left : false,
-            right : false,
-            right : false,
+        if( Object.size(game.arrayMonster) == 0 ){
+            game.killAll();
+            this.actualRoom = map;
+            this.murs.map( mur =>{
+                mur.kill();
+                mur = null;
+                return mur;
+            });
+            this.murs = [];
+            this.porte = {
+                up : false,
+                left : false,
+                right : false,
+                right : false,
+            }
+            this.makeMap();
+            this.actualRoom.generateMonster();
         }
-        this.makeMap();
-        this.actualRoom.generateMonster();
     }
 
     makeMap(){
@@ -138,41 +152,43 @@ class Map {
             game.physics.arcade.collide(player.player.head,mur);
         });
 
-        if ( this.porte.right ){
-            if( game.physics.arcade.collide(this.porte.right.sprite ,player.player.body) ){
-                player.player.body.position = {
-                    x : 100,
-                    y : game.height / 2
+        if( Object.size(game.arrayMonster) == 0 ){
+            if ( this.porte.right ){
+                if( game.physics.arcade.collide(this.porte.right.sprite ,player.player.body) ){
+                    player.player.body.position = {
+                        x : 100,
+                        y : game.height / 2
+                    }
+                    this.nextMap(this.porte.right.map);
                 }
-                this.nextMap(this.porte.right.map);
             }
-        }
-        if ( this.porte.left ){            
-            if( game.physics.arcade.collide(this.porte.left.sprite ,player.player.body) ){
-                player.player.body.position = {
-                    x : game.width - 100,
-                    y : game.height / 2
+            if ( this.porte.left ){            
+                if( game.physics.arcade.collide(this.porte.left.sprite ,player.player.body) ){
+                    player.player.body.position = {
+                        x : game.width - 100,
+                        y : game.height / 2
+                    }
+                    this.nextMap(this.porte.left.map);
                 }
-                this.nextMap(this.porte.left.map);
             }
-        }
-        if ( this.porte.up ){
-            if( game.physics.arcade.collide(this.porte.up.sprite ,player.player.body) ){
-                player.player.body.position = {
-                    x : game.width / 2,
-                    y : game.height -100
+            if ( this.porte.up ){
+                if( game.physics.arcade.collide(this.porte.up.sprite ,player.player.body) ){
+                    player.player.body.position = {
+                        x : game.width / 2,
+                        y : game.height -100
+                    }
+                    this.nextMap(this.porte.up.map);
                 }
-                this.nextMap(this.porte.up.map);
             }
-        }
-        if ( this.porte.down ){
-            if( game.physics.arcade.collide(this.porte.down.sprite ,player.player.body) ){
-                console.log('Hello');
-                player.player.body.position = {
-                    x : game.width /2,
-                    y : 100
+            if ( this.porte.down ){
+                if( game.physics.arcade.collide(this.porte.down.sprite ,player.player.body) ){
+                    console.log('Hello');
+                    player.player.body.position = {
+                        x : game.width /2,
+                        y : 100
+                    }
+                    this.nextMap(this.porte.down.map);
                 }
-                this.nextMap(this.porte.down.map);
             }
         }
 
@@ -180,7 +196,7 @@ class Map {
 }
 
 class room {
-    constructor(posX , posY){
+    constructor(posX , posY , porteAfter){
         this.x = posX;
         this.y = posY;
         this.porte = {
@@ -202,8 +218,7 @@ class room {
         ]
         this.generatePort();
     }
-    generatePort(){
-        
+    generatePort () {        
         if ( this.y == 0) { 
             this.porte.up = false;
         }
@@ -215,14 +230,13 @@ class room {
         }
         else if (this.x ==  2){
             this.porte.right = false;
-        }
+        }   
     }
     generateInt(max){
         return Math.floor(Math.random() * max);
     }
     generateMonster(){
-        var totalMonster = this.generateInt(4);
-        console.log(totalMonster);  
+        var totalMonster = this.generateInt(6);
         for(var i = 0; i < totalMonster; i++){
             var nbMonster = this.generateInt(this.monster.length);
             var tmp = new this.monster[nbMonster]();

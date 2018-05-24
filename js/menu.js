@@ -8,8 +8,11 @@ var menuState = {
         wKey.onDown.addOnce(this.startNewGame, this);
     },
     startNewGame: function(){
-        console.log("Go");
-        player.create({});
+        player.create({
+            stuff : {
+//                arms : "ice"
+            }
+        });
         game.state.start('play');
     }
 }

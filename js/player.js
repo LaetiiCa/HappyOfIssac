@@ -80,6 +80,7 @@ var player = {
         game.state.start('menuStart');
     },
     setAllStuff: function( stuff ){
+        console.log(stuff);
         this.setArms(stuff.arms ? stuff.arms : null);
         this.setHat(stuff.hat ? stuff.hat : null);
         this.setShoes(stuff.shoes ? stuff.shoes : null);
@@ -174,7 +175,9 @@ var player = {
         for ( i in this.ballShoot){
             this.ballShoot[i].update();
         }
-        this.map.update();
+        if ( this.map != undefined ){
+            this.map.update();            
+        }
     },
     checkMouv: function (){
         if ( !this.playerFixed ) {
@@ -268,13 +271,10 @@ var player = {
         this.setCharacter();
     },
     generateSprite: function(){
+        var isFirst = false;
         if ( this.player == undefined ){
-            //this.map.makeMap();
-            // this.map.renderMap();
-            //console.log(this.map.map[][0]);
-            //game.physics.arcade.enable([this.map.map[1][1]]);
             var position = {x : 100, y : 100};
-            //this.goToMap(this.map.map[0][0]);
+            isFirst = true;
         }
         else {
             var position = this.getPosition();
@@ -282,7 +282,9 @@ var player = {
         this.player = this.character.generateSprite(position, this.direction);
       
       //  game.camera.follow(this.player.body);
-        this.map = new Map();      
+        if ( isFirst ) {
+            this.map = new Map();      
+        }
         this.setArmor(this.character.armor);
         this.setVelocity(this.character.velocity);
     },

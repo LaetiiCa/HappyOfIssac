@@ -24,11 +24,7 @@ var loadState = {
     },
     loadPerso: function() {
         game.player = player;
-        game.player.create({
-            stuff : {
-                arms : "sprout"
-            }
-        });
+        game.player.create({});
     },
     loadMonster: function() {
         game.load.atlas('alarm', './assets/sprites/alarm/alarm.png','./assets/sprites/alarm/alarm.json');
