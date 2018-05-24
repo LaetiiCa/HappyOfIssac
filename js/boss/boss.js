@@ -29,7 +29,7 @@ class boss {
     attack() {
         var tmp = new weaponDistance(player, {
             damage: this.damage,
-            sprite: 'foods',
+            sprite: 'foods2',
             position: this.sprite.body.position,
             velocity: 1.5
         }, this);
@@ -85,6 +85,11 @@ class boss {
             }
         }
         game.killBoss(this.id);
+        player.setLevel(player.level+ 1);
         this.sprite.destroy();
+        player.nextMap();
+    }
+    generateInt(max){
+        return Math.floor(Math.random() * max);
     }
 }

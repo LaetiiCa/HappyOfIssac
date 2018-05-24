@@ -17,8 +17,10 @@ var player = {
         this.lifeSprite = null;
         this.sprite = 0;
         this.lastFire = new Date();
-        this.timeBetweenTwoShoot = 0.5;
+        this.timeBetweenTwoShoot = 0.3;
         this.ballShoot = {};
+        this.monsterKill = 0;
+        this.monsterKillSprite = this.monsterKillSprite= game.add.text(game.width - 80 ,80, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
         this.direction = 'up';
         this.setCharacter();
         this.setLevel(params.level ? params.level : 1 );
@@ -35,6 +37,34 @@ var player = {
     },
     setLevel : function(level) {
         this.level = level;
+        var loadingLabel = game.add.text(80,150, "Level next : " + this.level, { font: '30px Courier', fill:'#fff'});
+        if (game.state.current != 'load'){
+            this.maxLife = 2.50 + (0.5 * this.level);
+            this.setLife(this.life + 1 , false);
+        }
+        switch (this.level) {
+            case 2 :
+                this.setShoes(slipper);
+                break;
+            case 3 :
+                this.setArms('ice');
+                this.setHat(hood);
+                break;
+            case 4 : 
+                this.setShoes(sportsShoes);
+                this.setArms('sprout');
+                this.setHat(hatCowBoy);
+                break;
+            case 5 : 
+                this.setShoes(princessShoes);
+                this.setArms('candy');
+                this.setHat(princessCrown);
+                break;
+            
+        }
+        setTimeout(function(){
+            loadingLabel.kill();
+        },5000);
     },
     setArmor: function(armor){
         this.armor = armor;
@@ -81,6 +111,7 @@ var player = {
         game.state.start('menuStart');
     },
     setAllStuff: function( stuff ){
+        console.log(stuff);
         this.setArms(stuff.arms ? stuff.arms : null);
         this.setHat(stuff.hat ? stuff.hat : null);
         this.setShoes(stuff.shoes ? stuff.shoes : null);
@@ -150,7 +181,12 @@ var player = {
 
             this.lifeSprite.add(tmp);
         }
-
+        this.lifeSprite.fixedToCamera = true;
+    },
+    drawKill(){
+        this.monsterKill++;
+        this.monsterKillSprite.kill()
+        this.monsterKillSprite= game.add.text(game.width - 50 ,50, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
     },
     drawChara: function(){
 
@@ -174,6 +210,9 @@ var player = {
         this.checkFire();
         for ( i in this.ballShoot){
             this.ballShoot[i].update();
+        }
+        if ( this.map != undefined ){
+            this.map.update();            
         }
     },
     checkMouv: function (){
@@ -268,15 +307,33 @@ var player = {
         this.setCharacter();
     },
     generateSprite: function(){
+        var isFirst = false;
         if ( this.player == undefined ){
-            var position = {x : game.world.centerX, y : game.world.centerY};
+            var position = {x : 100, y : 100};
+            isFirst = true;
         }
         else {
             var position = this.getPosition();
         }
         this.player = this.character.generateSprite(position, this.direction);
+      
+      //  game.camera.follow(this.player.body);
+        if ( isFirst ) {
+            this.map = new Map();      
+        }
         this.setArmor(this.character.armor);
         this.setVelocity(this.character.velocity);
+    },
+    nextMap(){
+        this.map.killMap();
+        this.map = new Map();
+    },
+    goToMap: function(map){
+        console.log(game.width);
+        game.camera.position = {
+            x : map.position.x + 10 ,
+            y : map.position.y +10,
+        };
     },
     generateExplosion: function(){
         this.playerFixed = true;
@@ -286,7 +343,7 @@ var player = {
         explosion.scale.setTo(1, 1);
         game.physics.arcade.enable([explosion]);
 
-        explosion.body.collideWorldBounds = true;
+        //explosion.body.collideWorldBounds = true;
 
         // Down animations
         explosion.animations.add('down', [0,1,2,3,4]);

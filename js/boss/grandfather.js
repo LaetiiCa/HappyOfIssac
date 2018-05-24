@@ -33,22 +33,14 @@ class grandfather extends boss {
         //up animations
         this.sprite.animations.add('up', [3,2,1,0]);
         this.sprite.head.animations.add('up', [17]);
-        //this.sprite.animations.play('up', 5, true);
-        //this.sprite.head.animations.play('up');
 
         //right animations
         this.sprite.animations.add('right', [10,8,9]);
         this.sprite.head.animations.add('right', [18]);
-        //this.sprite.animations.play('right', 5, true);
-        //this.sprite.head.animations.play('right', 5, true);
 
         //left animations
         this.sprite.animations.add('left', [12,13,14]);
         this.sprite.head.animations.add('left', [19]);
-        //this.sprite.animations.play('left', 5, true);
-        //this.sprite.head.animations.play('left', 5, true);
-        this.sprite.animations.play('down', 5, true);
-        this.sprite.head.animations.play('down');
 
         this.setDirection();
     }
@@ -63,7 +55,6 @@ class grandfather extends boss {
                 player.setDamage(this.damage);
                 console.log(this.damage);
             }
-            console.log('ATTACK');
         }
         if((new Date() - this.lastAttack) / 1000 > 6.5) {
            this.sprite.scale.setTo(3,3);

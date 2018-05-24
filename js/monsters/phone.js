@@ -56,9 +56,10 @@ class phone extends monster {
     checkAttack(){
         if((new Date() - this.lastAttack) / 1000 > 5) {
             this.sprite.scale.setTo(0.7,0.7);
-            if (game.physics.arcade.collide(this.sprite, player.player.body) || game.physics.arcade.collide(this.sprite,player.player.head)) {
-                player.setDamage(this.damage);
-            }
+            
+        }
+        if (game.physics.arcade.collide(this.sprite, player.player.body) || game.physics.arcade.collide(this.sprite,player.player.head)) {
+            player.setDamage(this.damage);
         }
         if((new Date() - this.lastAttack) / 1000 > 7) {
             this.sprite.scale.setTo(0.5, 0.5);

@@ -1,7 +1,7 @@
 class ice extends Weapon {
     constructor ( direction , player ){
         super({
-            velocity : 1.5,
+            velocity : 3,
             direction : direction,
             degat : 1,
             rotationSpeed : 5,
@@ -9,7 +9,7 @@ class ice extends Weapon {
         this.sprite = null;
         this.player = player;
         this.enemyTouch = false;
-        this.timeBonus = 3;
+        this.timeBonus = 1;
     }
     onTouchEnemy(enemy) {
         enemy.damageReceived(this.damage);

@@ -28,7 +28,7 @@ class monster {
     attack() {
         var tmp = new weaponDistance(player, {
             damage: this.damage,
-            sprite: 'foods',
+            sprite: 'foods2',
             position: this.sprite.body.position,
             velocity: 1
         }, this);
@@ -52,6 +52,7 @@ class monster {
         this.life = this.life - damage;
         if (this.life <= 0) {
             this.monsterDead();
+            player.drawKill();
         }
         return this.life;
     }

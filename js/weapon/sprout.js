@@ -1,7 +1,7 @@
 class sprout extends Weapon {
     constructor ( direction , player ){
         super({
-            velocity : 1.5,
+            velocity : 3,
             direction : direction,
             degat : 1,
             rotationSpeed : 7,

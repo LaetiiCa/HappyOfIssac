@@ -11,8 +11,12 @@ var loadState = {
         game.state.start('menuStart');
     },
     loadTexture: function(){
-        game.load.image('sol', './assets/texture/sol.jpg');
+        game.load.image('sol', './assets/texture/sol.png');
+        game.load.image('floor', './assets/texture/blanc.png');
+        game.load.image('nuage', './assets/texture/nuage.png');
+        game.load.image('porte', './assets/texture/porte.png');
         game.load.atlas('foods', './assets/texture/foods.png', './assets/texture/foods.json');
+        game.load.atlas('foods2', './assets/texture/foods2.png', './assets/texture/foods.json');
         game.load.atlas('life', './assets/texture/life.png', './assets/texture/life.json');
         game.load.atlas('explosion_blue', './assets/texture/explosion_blue.png', './assets/texture/explosion.json');
         game.load.atlas('explosion', './assets/texture/explosion_lit.png', './assets/texture/explosion.json');
@@ -22,11 +26,7 @@ var loadState = {
     },
     loadPerso: function() {
         game.player = player;
-        game.player.create({
-            stuff : {
-                arms : "ice"
-            }
-        });
+        game.player.create({});
     },
     loadMonster: function() {
         game.load.atlas('alarm', './assets/sprites/alarm/alarm.png','./assets/sprites/alarm/alarm.json');
@@ -41,5 +41,7 @@ var loadState = {
         game.load.atlas('brother', './assets/sprites/brother/brother.png', './assets/sprites/brother/brother.json');
         game.load.atlas('grandfather', './assets/sprites/grandfather/grandfather.png', './assets/sprites/grandfather/grandfather.json');
         game.load.atlas('grandmother', './assets/sprites/grandmother/grandmother.png', './assets/sprites/grandmother/grandmother.json');
+        game.load.atlas('mother', './assets/sprites/mother/mother.png', './assets/sprites/mother/mother.json');
+        game.load.atlas('father', './assets/sprites/father/father.png', './assets/sprites/father/father.json');
     }
 };
