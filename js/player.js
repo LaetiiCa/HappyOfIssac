@@ -20,13 +20,15 @@ var player = {
         this.timeBetweenTwoShoot = 0.3;
         this.ballShoot = {};
         this.monsterKill = 0;
-        this.monsterKillSprite = this.monsterKillSprite= game.add.text(game.width - 80 ,80, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
+        this.monsterKillSprite = game.add.text(game.width - 80 ,80, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
         this.direction = 'up';
         this.setCharacter();
-        this.setLevel(params.level ? params.level : 1 );
+        this.setLevel(params.level ? params.level : 1);
         this.maxLife = 2.50 + (0.5 * this.level);
         this.setLife(params.life ? params.life : 3 , true );
         this.setAllStuff( params.stuff ? params.stuff : {} );
+        //this.setLevel(params.level ? params.level : 5 );
+        
         this.loadSprite();
     },
     setVelocity : function(velocity){
@@ -36,6 +38,7 @@ var player = {
         this.character = this.allCharacter[this.sprite];
     },
     setLevel : function(level) {
+        console.log(level);
         this.level = level;
         var loadingLabel = game.add.text(80,150, "Level next : " + this.level, { font: '30px Courier', fill:'#fff'});
         if (game.state.current != 'load'){
@@ -111,7 +114,6 @@ var player = {
         game.state.start('menuStart');
     },
     setAllStuff: function( stuff ){
-        console.log(stuff);
         this.setArms(stuff.arms ? stuff.arms : null);
         this.setHat(stuff.hat ? stuff.hat : null);
         this.setShoes(stuff.shoes ? stuff.shoes : null);
@@ -186,7 +188,7 @@ var player = {
     drawKill(){
         this.monsterKill++;
         this.monsterKillSprite.kill()
-        this.monsterKillSprite= game.add.text(game.width - 50 ,50, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
+        this.monsterKillSprite= game.add.text(game.width - 70 ,70, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
     },
     drawChara: function(){
 

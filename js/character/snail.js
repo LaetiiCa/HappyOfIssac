@@ -1,6 +1,6 @@
 var snail = {
     name: "snail",
-    velocity : 0.5,
+    velocity : 1,
     armor : 1.5,
     animationsFrames : 12,
     generateSprite : function( position, direction ){
