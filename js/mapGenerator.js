@@ -31,9 +31,9 @@ class Map {
     checkIsPosible (){
         for( var y = 0; y < this.allRooms.length; y++){
             for(var x = 0; x < this.allRooms[y].length; x++){
-                
+
             }
-        } 
+        }
     }
 
     nextMap(map){
@@ -73,7 +73,7 @@ class Map {
                             sprite : game.add.sprite(x , posY , 'porte'),
                         };
                         game.physics.arcade.enable([this.porte.up.sprite]);
-                        
+
                         this.porte.up.sprite.body.checkColision = true;
                         this.porte.up.sprite.body.immovable = true;
                         this.porte.up.sprite.body.setSize(120,60);
@@ -84,9 +84,9 @@ class Map {
                             map : this.allRooms[this.actualRoom.y + 1][this.actualRoom.x],
                             sprite : game.add.sprite(x , posY , 'porte'),
                         };
-                        
+
                         game.physics.arcade.enable([this.porte.down.sprite]);
-                        
+
                         this.porte.down.sprite.body.checkColision = true;
                         this.porte.down.sprite.body.immovable = true;
                         this.porte.down.sprite.body.setSize(120,60);
@@ -111,7 +111,7 @@ class Map {
                             sprite :  game.add.sprite(posX, y, 'porte'),
                         };
                         game.physics.arcade.enable([this.porte.left.sprite]);
-                        
+
                         this.porte.left.sprite.body.checkColision = true;
                         this.porte.left.sprite.body.immovable = true;
                         this.porte.left.sprite.body.setSize(60,120);
@@ -140,10 +140,10 @@ class Map {
             mur.checkColision = true;
             mur.body.immovable = true;
         });
-        
+
     }
     renderMap(){
-        
+
     }
 
     update(){
@@ -162,7 +162,7 @@ class Map {
                     this.nextMap(this.porte.right.map);
                 }
             }
-            if ( this.porte.left ){            
+            if ( this.porte.left ){
                 if( game.physics.arcade.collide(this.porte.left.sprite ,player.player.body) ){
                     player.player.body.position = {
                         x : game.width - 100,
@@ -205,7 +205,7 @@ class room {
             left : true,
             right : true
         };
-        this.monster = [ 
+        this.monster = [
             cat,
             Alarm,
             bird,
@@ -218,25 +218,25 @@ class room {
         ]
         this.generatePort();
     }
-    generatePort () {        
-        if ( this.y == 0) { 
+    generatePort () {
+        if ( this.y == 0) {
             this.porte.up = false;
         }
         else if (this.y ==  2){
             this.porte.down = false;
         }
-        if ( this.x == 0) { 
+        if ( this.x == 0) {
             this.porte.left = false;
         }
         else if (this.x ==  2){
             this.porte.right = false;
-        }   
+        }
     }
     generateInt(max){
         return Math.floor(Math.random() * max);
     }
     generateMonster(){
-        var totalMonster = this.generateInt(6);
+        var totalMonster = this.generateInt(0);
         for(var i = 0; i < totalMonster; i++){
             var nbMonster = this.generateInt(this.monster.length);
             var tmp = new this.monster[nbMonster]();

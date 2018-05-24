@@ -1,16 +1,16 @@
-class grandmother extends boss {
+class mother extends boss {
 
     constructor() {
         super({
-            name : 'grandmother',
-            damage: 2,
-            life : 25
+            name : 'mother',
+            damage: 2.5,
+            life : 30
         })
     }
     create() {
         this.sprite = game.add.sprite(400, 300, this.name);
         this.sprite.anchor.setTo(0.5,0.5);
-        this.sprite.scale.setTo(3,3);
+        this.sprite.scale.setTo(2,2);
         game.physics.arcade.enable([this.sprite]);
 
 
@@ -68,38 +68,6 @@ class grandmother extends boss {
             {
                 x : 250,
                 y : 125
-            },
-            {
-                x : 125,
-                y : 250
-            },
-            {
-                x : -125,
-                y : 250
-            },
-            {
-                x : -250,
-                y : 125
-            },
-            {
-                x : -250,
-                y : -125
-            },
-            {
-                x : -125,
-                y : -250
-            },
-            {
-                x : 125,
-                y : -250
-            },
-            {
-                x : 125,
-                y : 250
-            },
-            {
-                x : 250,
-                y : -125
             }
         ];
         var tmp = new weaponMultiples(player, {
@@ -108,6 +76,6 @@ class grandmother extends boss {
             position: this.sprite.body.position,
             velocity: 1.5
         }, this,obj);
-    this.weapons[tmp.id] = tmp;
+        this.weapons[tmp.id] = tmp;
     }
 }

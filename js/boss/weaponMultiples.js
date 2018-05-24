@@ -1,12 +1,13 @@
 class weaponMultiples {
 
-    constructor(player, params, parent) {
+    constructor(player, params, parent, obj) {
         this.velocity = params.velocity * 200;
         this.parent = parent;
         this.sprite = null;
         this.damage = params.damage;
         this.player = player;
         this.allBall = [];
+        this.obj = obj;
         this.id = this.idGenerator();
         this.generateSprite(params.position, params);
         this.lastGenerate = new Date();
@@ -15,84 +16,14 @@ class weaponMultiples {
 
     }
     generateSprite(position, params) {
-        var obj = [
-            {
-                x : 0,
-                y : -250
-            },
-            {
-                x : 250,
-                y : -250
-            },
-            {
-                x : 250,
-                y : 0
-            },
-            {
-                x : 250,
-                y : 250
-            },
-            {
-                x : 0,
-                y : 250
-            },
-            {
-                x : -250,
-                y : 250
-            },
-            {
-                x : -250,
-                y : 0
-            },
-            {
-                x : -250,
-                y : -250
-            },
-            {
-                x : 250,
-                y : 125
-            },
-            {
-                x : 125,
-                y : 250
-            },
-            {
-                x : -125,
-                y : 250
-            },
-            {
-                x : -250,
-                y : 125
-            },
-            {
-                x : -250,
-                y : -125
-            },
-            {
-                x : -125,
-                y : -250
-            },
-            {
-                x : 125,
-                y : -250
-            },
-            {
-                x : 125,
-                y : 250
-            },
-            {
-                x : 250,
-                y : -125
-            }
-        ];
-        for ( var i = 0; i < obj.length; i++){
+        for ( var i = 0; i < this.obj.length; i++){
             var tmp = game.add.sprite(position.x + 50, position.y + 50, params.sprite);
             tmp.anchor.setTo(0.5, 0.5);
             game.physics.arcade.enable([tmp]);
             tmp.animations.add('candy', [0]);
             tmp.body.checkCollision = true;
-            tmp.body.velocity.x  = obj[i].x;
-            tmp.body.velocity.y = obj[i].y;
+            tmp.body.velocity.x  = this.obj[i].x;
+            tmp.body.velocity.y = this.obj[i].y;
             this.allBall.push(tmp);
         }
 
