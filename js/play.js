@@ -8,6 +8,7 @@ var playState = {
         this.player = game.player;
         game.arrayMonster = {};
         //game.add.sprite(0,-5,"sol");
+        game.arrayBoss = {};
         this.player.setLife(3,true);
         this.player.generateSprite();
         this.player.attachKey();
@@ -27,6 +28,11 @@ var playState = {
             this.player.update();
             for(var i in game.arrayMonster){
                 game.arrayMonster[i].update();
+            }
+            for(var i in game.arrayBoss){
+                if (player.player.hasOwnProperty('body')) {
+                    game.arrayBoss[i].update();
+                }
             }
             this.checkcolition();
         }

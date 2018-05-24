@@ -1,19 +1,19 @@
-class cat extends monster {
+class brother extends boss {
 
     constructor() {
         super({
-            name : 'cat',
-            damage : 0.1,
-            life : 6
-        });
+            name : 'brother',
+            damage : 1.8,
+            life : 15
+        })
         this.inAttack = false;
     }
     create() {
         this.sprite = game.add.sprite(this.generateInt(game.world.width), this.generateInt(game.world.height), this.name);
-        this.sprite.animations.add('down', [0,1,2,1]);
-        this.sprite.animations.add('up', [3,4,5,4]);
-        this.sprite.animations.add('left', [6,7,8,7]);
-        this.sprite.animations.add('right', [9,10,11,10]);
+        this.sprite.animations.add('down', [0,1,0,1]);
+        this.sprite.animations.add('up', [2,3,2,3]);
+        this.sprite.animations.add('left', [4,5,4,5]);
+        this.sprite.animations.add('right', [6,7,6,7]);
         this.sprite.animations.play('right', 5, true);
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.scale.setTo(1.8, 1.8);
@@ -21,8 +21,9 @@ class cat extends monster {
         this.sprite.body.checkCollision = true;
         this.sprite.body.collideWorldBounds = true;
         this.sprite.body.bounce.setTo(2,2);
+
     }
-    moveToPlayer() {
+    moveToPlayerBoss() {
         if ( !this.inAttack ) {
             game.physics.arcade.moveToObject(this.sprite, player.player.body.body, 80);
             var tmpX = this.sprite.body.position.x - player.player.body.body.position.x;
@@ -46,7 +47,7 @@ class cat extends monster {
                 this.inAttack = true;
             }
         } else if ((new Date() - this.lastAttack) / 1000 > 1.5) {
-                this.inAttack = false;
+            this.inAttack = false;
         }
     }
 }

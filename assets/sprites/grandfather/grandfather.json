@@ -1,0 +1,102 @@
+{"frames":
+[
+  {
+    "filename": "down00",
+    "frame": {"x":35,"y":42,"w":22,"h":16}
+  },
+  {
+    "filename": "down02",
+    "frame": {"x":70,"y":42,"w":20,"h":16}
+  },
+  {
+    "filename": "down03",
+    "frame": {"x":197,"y":42,"w":21,"h":16}
+  },
+  {
+    "filename": "down04",
+    "frame": {"x":228,"y":42,"w":20,"h":16}
+  },
+  {
+    "filename": "up00",
+    "frame": {"x":31,"y":193,"w":33,"h":53}
+  },
+  {
+    "filename": "up01",
+    "frame": {"x":31,"y":193,"w":33,"h":53}
+  },
+  {
+    "filename": "up02",
+    "frame": {"x":31,"y":193,"w":33,"h":53}
+  },
+  {
+    "filename": "up03",
+    "frame": {"x":225,"y":197,"w":30,"h":49}
+  },
+
+  {
+    "filename": "left00",
+    "frame": {"x":69,"y":73,"w":18,"h":16}
+  },
+  {
+    "filename": "left01",
+    "frame": {"x":99,"y":71,"w":21,"h":18}
+  },
+  {
+    "filename": "left02",
+    "frame": {"x":38,"y":73,"w":17,"h":16}
+  },
+  {
+    "filename": "left03",
+    "frame": {"x":223,"y":68,"w":33,"h":52}
+  },
+
+
+  {
+    "filename": "right00",
+    "frame": {"x":387,"y":75,"w":18,"h":17}
+  },
+  {
+    "filename": "right01",
+    "frame": {"x":353,"y":75,"w":20,"h":17}
+  },
+  {
+    "filename": "left02",
+    "frame": {"x":321,"y":75,"w":19,"h":15}
+  },
+  {
+    "filename": "left03",
+    "frame": {"x":302,"y":123,"w":19,"h":13}
+  },
+
+  {
+    "filename": "headDown",
+    "frame": {"x":0,"y":0,"w":31,"h":29}
+  },
+  {
+    "filename": "headUp",
+    "frame": {"x":128,"y":0,"w":32,"h":27}
+  },
+  {
+    "filename": "headLeft",
+    "frame": {"x":64,"y":0,"w":30,"h":27}
+  },
+  {
+    "filename": "headLeft",
+    "frame": {"x":116,"y":103,"w":30,"h":27}
+  },
+
+  {
+    "filename": "dead",
+    "frame": {"x":244,"y":825,"w":107,"h":85}
+  }
+],
+  "meta": {
+    "app": "http://www.texturepacker.com",
+    "version": "1.0",
+    "image": "issac.png",
+    "format": "RGBA8888",
+    "size": {"w":252,"h":256},
+    "scale": "0.2",
+    "smartupdate": "$TexturePacker:SmartUpdate:fb56f261b1eb04e3215824426595f64c$"
+  }
+}

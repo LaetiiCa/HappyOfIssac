@@ -8,15 +8,17 @@ game.state.start('boot');
 game.killMonster = function(id){
     delete game.arrayMonster[id];
 };
-
+game.killBoss = function(id){
+    delete game.arrayBoss[id];
+};
 game.killAll = function(){
-    // for(var i = 0 ; i < game.arrayBoss.length;i++){
-    //     game.arrayBoss[i].sprite.kill();
-    //     game.killBoss(game.arrayBoss[i].id);
-    // }
-    for(var i in  game.arrayMonster){
-        console.log(game.arrayMonster[i]);
+    for(var i = 0 ; i < game.arrayBoss.length;i++){
+        game.arrayBoss[i].sprite.kill();
+        game.killBoss(game.arrayBoss[i].id);
+    }
+    for(var i = 0 ; i < game.arrayMonster.length;i++){
         game.arrayMonster[i].sprite.kill();
+
 
         game.killMonster(game.arrayMonster[i].id);
     }

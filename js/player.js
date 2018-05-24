@@ -64,10 +64,11 @@ var player = {
             this.destroyBallShoot(this.ballShoot[i]);
         }
         for ( var i in this.allCharacter){
-            if (this.allCharacter[i].player !== undefined ){
-                this.allCharacter[i].killSprite();
+            if ( this.allCharacter[i].player != undefined ){
+                    this.allCharacter[i].killSprite();
             }
         }
+        game.killAll();
         this.player = undefined;
 
         game.add.text(80,game.world.height -80, 'press w to menu', { font: '25px Arial', fill :'#000'});
