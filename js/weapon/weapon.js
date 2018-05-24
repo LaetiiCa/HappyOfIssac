@@ -10,6 +10,7 @@ class Weapon {
     update(){
         if ( this.sprite != null ) {
             this.checkCollisionMonster();
+            this.checkCollisionBoss();
             this.checkOutsideWorld();
             this.sprite.angle += this.rotationSpeed;
             if ( this.updateWeaponSpecial ){
@@ -21,6 +22,13 @@ class Weapon {
         for ( var i in game.arrayMonster){
             if(game.physics.arcade.collide(this.sprite, game.arrayMonster[i].sprite)){
                 this.onTouchEnemy(game.arrayMonster[i]);
+            }
+        }
+    }
+    checkCollisionBoss(){
+        for ( var i in game.arrayBoss){
+            if(game.physics.arcade.collide(this.sprite, game.arrayBoss[i].sprite)){
+                this.onTouchEnemy(game.arrayBoss[i]);
             }
         }
     }

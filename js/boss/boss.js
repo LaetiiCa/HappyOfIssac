@@ -1,12 +1,12 @@
-class monster {
+class boss {
     constructor(params) {
         this.name = params.name;
         this.create();
         this.attackPossible = false;
         this.lastAttack = new Date();
-        this.damage = params.damage + (0.5 * player.level);
+        this.damage = params.damage;
         this.weapons = {};
-        this.life = params.life + (0.5 * player.level);
+        this.life = params.life;
         this.isBlocked = false;
         this.velocityArm = params.velocityArm ? params.velocityArm : 1;
         this.id = this.idGenerator();
@@ -19,18 +19,19 @@ class monster {
 
         } else {
             this.checkAttack();
-            this.moveToPlayer();
+            this.moveToPlayerBoss();
         }
         for (var i in this.weapons) {
             this.weapons[i].update();
         }
     }
+
     attack() {
         var tmp = new weaponDistance(player, {
             damage: this.damage,
             sprite: 'foods',
             position: this.sprite.body.position,
-            velocity: 1
+            velocity: 1.5
         }, this);
         this.weapons[tmp.id] = tmp;
     }
@@ -51,7 +52,7 @@ class monster {
     damageReceived(damage) {
         this.life = this.life - damage;
         if (this.life <= 0) {
-            this.monsterDead();
+            this.bossDead();
         }
         return this.life;
     }
@@ -68,7 +69,7 @@ class monster {
     idGenerator(){
         return '_' + Math.random().toString(36).substr(2, 9);
     }
-    monsterDead() {
+    bossDead() {
         if ( this.sprite.body != undefined ) {
             var explosion = game.add.sprite(this.sprite.body.position.x, this.sprite.body.position.y, "explosion");
             explosion.anchor.setTo(0.3,0.3);
@@ -83,10 +84,7 @@ class monster {
                 }
             }
         }
-        game.killMonster(this.id);
+        game.killBoss(this.id);
         this.sprite.destroy();
-    }
-    generateInt(max){
-        return Math.floor(Math.random() * max);
     }
 }

@@ -12,7 +12,6 @@ class ice extends Weapon {
         this.timeBonus = 3;
     }
     onTouchEnemy(enemy) {
-        console.log('ice', enemy);
         enemy.damageReceived(this.damage);
         enemy.startBlock();
         this.enemyTouch = enemy;

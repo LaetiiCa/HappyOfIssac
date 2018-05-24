@@ -5,6 +5,7 @@ var loadState = {
         this.loadSound();
         this.loadPerso();
         this.loadMonster();
+        this.loadBoss();
     },
     create: function() {
         game.state.start('menuStart');
@@ -23,7 +24,7 @@ var loadState = {
         game.player = player;
         game.player.create({
             stuff : {
-                arms : "sprout"
+                arms : "ice"
             }
         });
     },
@@ -34,5 +35,11 @@ var loadState = {
         game.load.atlas('mosquito', './assets/sprites/mosquito/mosquito.png','./assets/sprites/mosquito/mosquito.json');
         game.load.atlas('bird', './assets/sprites/bird/bird.png', './assets/sprites/bird/bird.json')
         game.load.atlas('phone', './assets/sprites/phone/phone.png', './assets/sprites/phone/phone.json')
+    },
+    loadBoss : function () {
+        game.load.atlas('babySister', './assets/sprites/babySister/babySister.png', './assets/sprites/babySister/babySister.json');
+        game.load.atlas('brother', './assets/sprites/brother/brother.png', './assets/sprites/brother/brother.json');
+        game.load.atlas('grandfather', './assets/sprites/grandfather/grandfather.png', './assets/sprites/grandfather/grandfather.json');
+        game.load.atlas('grandmother', './assets/sprites/grandmother/grandmother.png', './assets/sprites/grandmother/grandmother.json');
     }
-}
+};

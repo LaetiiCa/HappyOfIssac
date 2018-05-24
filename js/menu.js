@@ -9,7 +9,13 @@ var menuState = {
     },
     startNewGame: function(){
         console.log("Go");
-        player.create({});
+        player.create({
+            stuff : {
+                arms : 'ice',
+                shoes : slipper,
+                hat: hood
+            }
+        });
         game.state.start('play');
     }
 }

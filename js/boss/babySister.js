@@ -1,45 +1,48 @@
-class nightmare extends monster{
+class babySister extends boss {
 
     constructor() {
         super({
-            name : 'nightmare',
-            damage: 0.7,
-            life: 6,
+            name : 'babySister',
+            damage : 1,
+            life : 10
         })
     }
     create() {
         this.sprite = game.add.sprite(this.generateInt(game.world.width), this.generateInt(game.world.height), this.name);
-        this.sprite.animations.add('down', [0,1,2,1]);
-        this.sprite.animations.add('up', [3,4,5,4]);
-        this.sprite.animations.add('left', [6,7,8,7]);
-        this.sprite.animations.add('right', [9,10,11,10]);
-        this.sprite.animations.play('right', 5, true);
-        this.sprite.scale.setTo(1.3, 1.3);
+        this.sprite.animations.add('down', [1,2,1,2]);
+        this.sprite.animations.add('staticDown', [0]);
+        this.sprite.animations.add('up', [4,5,4,5]);
+        this.sprite.animations.add('staticUp', [3]);
+        this.sprite.animations.add('staticLeft', [6]);
+        this.sprite.animations.add('left', [7,8,7,8]);
+        this.sprite.animations.add('staticRight', [9]);
+        this.sprite.animations.add('right', [10,11,10,11]);
+        this.sprite.anchor.setTo(0.8, 0.8);
+        this.sprite.scale.setTo(1,1);
         game.physics.arcade.enable([this.sprite]);
         this.sprite.body.checkCollision = true;
         this.sprite.body.collideWorldBounds = true;
-        this.sprite.anchor.setTo(0.5, 0.5);
-
     }
-    moveToPlayer() {
+    moveToPlayerBoss() {
         game.physics.arcade.moveToObject(this.sprite, player.player.body.body, 80);
         var tmpX = this.sprite.body.position.x - player.player.body.body.position.x;
         var tmpY = this.sprite.body.position.y - player.player.body.body.position.y;
-        if (tmpX > -180 && tmpX < 180 && tmpY > -180 && tmpY < 180) {
+        if (tmpX > -160 && tmpX < 160 && tmpY > -160 && tmpY < 160  ) {
             this.sprite.body.velocity.x = 0;
             this.sprite.body.velocity.y = 0;
+            this.sprite.animations.stop(null, true);
             this.attackPossible = true;
         }
         else {
             var tmpY = this.sprite.body.position.y - player.player.body.body.position.y;
             if (this.sprite.body.velocity.y < 0 && (tmpY > 100 || tmpY < -100)) {
-                this.sprite.animations.play('up', 7, true);
+                this.sprite.animations.play('up', 4, true);
             } else if (this.sprite.body.velocity.y > 0 && (tmpY > 100 || tmpY < -100)) {
-                this.sprite.animations.play('down', 7, true);
+                this.sprite.animations.play('down', 4, true);
             } else if (this.sprite.body.velocity.x < 0) {
-                this.sprite.animations.play('left', 7, true);
+                this.sprite.animations.play('left', 4, true);
             } else {
-                this.sprite.animations.play('right', 7, true);
+                this.sprite.animations.play('right', 4, true);
             }
             this.attackPossible = false;
         }

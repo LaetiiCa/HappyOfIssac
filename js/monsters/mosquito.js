@@ -9,7 +9,7 @@ class mosquito extends monster {
         this.inAttack = false;
     }
     create() {
-        this.sprite = game.add.sprite(game.world.centerX, game.world.centerY, this.name);
+        this.sprite = game.add.sprite(this.generateInt(game.world.width), this.generateInt(game.world.height), this.name);
         this.sprite.animations.add('left', [0,1,2,3,2]);
         this.sprite.animations.add('right', [4,5,6,7,6]);
         this.sprite.animations.play('right', 5, true);
@@ -37,7 +37,6 @@ class mosquito extends monster {
         }
     }
     checkAttack() {
-        console.log((new Date() - this.lastAttack) / 1000);
         if ((new Date() - this.lastAttack) / 1000 > 3) {
             if (game.physics.arcade.collide(this.sprite, player.player.body) || game.physics.arcade.collide(this.sprite,player.player.head)) {
                 player.setDamage(this.damage);
