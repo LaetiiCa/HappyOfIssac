@@ -56,9 +56,9 @@ class Alarm extends monster {
     checkAttack(){
         if((new Date() - this.lastAttack) / 1000 > 5) {
             this.sprite.scale.setTo(0.7,0.7);
-                if (game.physics.arcade.collide(this.sprite, player.player.body) || game.physics.arcade.collide(this.sprite,player.player.head)) {
-                    player.setDamage(this.damage);
-                }
+        }
+        if (game.physics.arcade.collide(this.sprite, player.player.body) || game.physics.arcade.collide(this.sprite,player.player.head)) {
+            player.setDamage(this.damage);
         }
         if((new Date() - this.lastAttack) / 1000 > 6.5) {
             this.sprite.scale.setTo(0.3, 0.3);

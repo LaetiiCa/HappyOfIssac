@@ -13,7 +13,11 @@ class Map {
             right : false,
             right : false,
         }
-        this.nextMap(this.allRooms[this.generateInt(2)][this.generateInt(2)]);
+        var tmp = this.allRooms[this.generateInt(2)][this.generateInt(2)];
+        while(tmp == this.bossMap){
+            var tmp = this.allRooms[this.generateInt(2)][this.generateInt(2)];
+        }
+        this.nextMap(tmp, true);
     }
     generateInt(max){
         return Math.floor(Math.random() * max);
@@ -26,17 +30,13 @@ class Map {
             }
             this.allRooms.push(linge);
         }
-        this.checkIsPosible();
-    }
-    checkIsPosible (){
-        for( var y = 0; y < this.allRooms.length; y++){
-            for(var x = 0; x < this.allRooms[y].length; x++){
 
-            }
-        }
+        this.bossMap = this.allRooms[this.generateInt(2)][this.generateInt(2)];
+        this.bossMap.isBoss = true;
+        this.bossMap.maxMonster = 0;
     }
 
-    nextMap(map){
+    nextMap(map, first){
         if( Object.size(game.arrayMonster) == 0 ){
             game.killAll();
             this.actualRoom = map;
@@ -53,7 +53,9 @@ class Map {
                 right : false,
             }
             this.makeMap();
-            this.actualRoom.generateMonster();
+            if (!first){
+                this.actualRoom.generateMonster();                
+            }
         }
     }
 
@@ -142,6 +144,13 @@ class Map {
         });
 
     }
+    killMap(){
+        this.murs.map( mur =>{
+            mur.kill();
+            mur = null;
+            return mur;
+        });
+    }
     renderMap(){
 
     }
@@ -159,7 +168,7 @@ class Map {
                         x : 100,
                         y : game.height / 2
                     }
-                    this.nextMap(this.porte.right.map);
+                    this.nextMap(this.porte.right.map, false);
                 }
             }
             if ( this.porte.left ){
@@ -168,7 +177,7 @@ class Map {
                         x : game.width - 100,
                         y : game.height / 2
                     }
-                    this.nextMap(this.porte.left.map);
+                    this.nextMap(this.porte.left.map, false);
                 }
             }
             if ( this.porte.up ){
@@ -177,7 +186,7 @@ class Map {
                         x : game.width / 2,
                         y : game.height -100
                     }
-                    this.nextMap(this.porte.up.map);
+                    this.nextMap(this.porte.up.map, false);
                 }
             }
             if ( this.porte.down ){
@@ -187,7 +196,7 @@ class Map {
                         x : game.width /2,
                         y : 100
                     }
-                    this.nextMap(this.porte.down.map);
+                    this.nextMap(this.porte.down.map, false);
                 }
             }
         }
@@ -196,7 +205,7 @@ class Map {
 }
 
 class room {
-    constructor(posX , posY , porteAfter){
+    constructor(posX , posY , porteAfter, isBoss){
         this.x = posX;
         this.y = posY;
         this.porte = {
@@ -216,7 +225,12 @@ class room {
         this.boss = [
 
         ]
+        this.maxMonster = 5 ;
         this.generatePort();
+        if (isBoss){
+            this.maxMonster = 0;
+        }
+        this.isBoss = isBoss;
     }
     generatePort () {
         if ( this.y == 0) {
@@ -236,11 +250,32 @@ class room {
         return Math.floor(Math.random() * max);
     }
     generateMonster(){
-        var totalMonster = this.generateInt(0);
+        var totalMonster = this.generateInt(this.maxMonster);
         for(var i = 0; i < totalMonster; i++){
             var nbMonster = this.generateInt(this.monster.length);
             var tmp = new this.monster[nbMonster]();
             game.arrayMonster[tmp.id] = tmp;
+        }
+        if (this.isBoss){
+            switch (player.level) {
+                case 1 :
+                    var tmp = new babySister();
+                    game.arrayBoss[tmp.id] = tmp;
+                    break;
+                case 2 :
+                    var tmp = new brother();
+                    game.arrayBoss[tmp.id] = tmp;
+                    break;
+                case 3 : 
+                    var tmp = new grandfather();
+                    game.arrayBoss[tmp.id] = tmp;
+                    break;
+                case 4 : 
+                    var tmp = new grandmother();
+                    game.arrayBoss[tmp.id] = tmp;
+                    break;
+                
+            }
         }
     }
 }

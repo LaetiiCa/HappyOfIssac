@@ -52,6 +52,7 @@ class monster {
         this.life = this.life - damage;
         if (this.life <= 0) {
             this.monsterDead();
+            player.drawKill();
         }
         return this.life;
     }

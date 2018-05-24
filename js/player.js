@@ -17,8 +17,10 @@ var player = {
         this.lifeSprite = null;
         this.sprite = 0;
         this.lastFire = new Date();
-        this.timeBetweenTwoShoot = 0.5;
+        this.timeBetweenTwoShoot = 0.3;
         this.ballShoot = {};
+        this.monsterKill = 0;
+        this.monsterKillSprite = this.monsterKillSprite= game.add.text(game.width - 80 ,80, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
         this.direction = 'up';
         this.setCharacter();
         this.setLevel(params.level ? params.level : 1 );
@@ -35,6 +37,34 @@ var player = {
     },
     setLevel : function(level) {
         this.level = level;
+        var loadingLabel = game.add.text(80,150, "Level next : " + this.level, { font: '30px Courier', fill:'#fff'});
+        if (game.state.current != 'load'){
+            this.maxLife = 2.50 + (0.5 * this.level);
+            this.setLife(this.life + 1 , false);
+        }
+        switch (this.level) {
+            case 2 :
+                this.setShoes(slipper);
+                break;
+            case 3 :
+                this.setArms('ice');
+                this.setHat(hood);
+                break;
+            case 4 : 
+                this.setShoes(sportsShoes);
+                this.setArms('sprout');
+                this.setHat(hatCowBoy);
+                break;
+            case 5 : 
+                this.setShoes(princessShoes);
+                this.setArms('candy');
+                this.setHat(princessCrown);
+                break;
+            
+        }
+        setTimeout(function(){
+            loadingLabel.kill();
+        },5000);
     },
     setArmor: function(armor){
         this.armor = armor;
@@ -152,6 +182,11 @@ var player = {
             this.lifeSprite.add(tmp);
         }
         this.lifeSprite.fixedToCamera = true;
+    },
+    drawKill(){
+        this.monsterKill++;
+        this.monsterKillSprite.kill()
+        this.monsterKillSprite= game.add.text(game.width - 50 ,50, this.monsterKill, { font: '30px Courier',fontWeight : 'bold', fill:'#000'});
     },
     drawChara: function(){
 
@@ -288,6 +323,10 @@ var player = {
         }
         this.setArmor(this.character.armor);
         this.setVelocity(this.character.velocity);
+    },
+    nextMap(){
+        this.map.killMap();
+        this.map = new Map();
     },
     goToMap: function(map){
         console.log(game.width);
