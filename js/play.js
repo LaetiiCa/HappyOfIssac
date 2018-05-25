@@ -29,7 +29,7 @@ var playState = {
         // var tmp = new bird();
         // game.arrayMonster[tmp.id] = tmp;
         //game.arrayMonster.push(new phone());
-        // var tmp = new babySister();
+        // var tmp = new father();
         // game.arrayBoss[tmp.id] = tmp;
     },
     update : function() {

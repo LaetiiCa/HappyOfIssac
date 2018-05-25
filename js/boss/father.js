@@ -40,6 +40,9 @@ class father extends boss {
         //left animations
         this.sprite.animations.add('left', [17,18,19,18]);
         this.sprite.head.animations.add('left', [28]);
+
+        this.sprite.body.setSize(20, 30, 0, -14);
+        
     }
     moveToPlayerBoss() {
         if ( !this.inAttack ) {

@@ -19,6 +19,7 @@ class brother extends boss {
         this.sprite.scale.setTo(1.8, 1.8);
         game.physics.arcade.enable([this.sprite]);
         this.sprite.body.checkCollision = true;
+        this.sprite.body.setSize(25, 35, 5, 20);
         this.sprite.body.collideWorldBounds = true;
         this.sprite.body.bounce.setTo(2,2);
 

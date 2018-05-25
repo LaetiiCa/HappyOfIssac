@@ -13,9 +13,9 @@ class Map {
             right : false,
             right : false,
         }
-        var tmp = this.allRooms[this.generateInt(2)][this.generateInt(2)];
+        var tmp = this.allRooms[this.generateInt(4)][this.generateInt(4)];
         while(tmp == this.bossMap){
-            var tmp = this.allRooms[this.generateInt(2)][this.generateInt(2)];
+            var tmp = this.allRooms[this.generateInt(4)][this.generateInt(4)];
         }
         this.nextMap(tmp, true);
     }
@@ -30,7 +30,7 @@ class Map {
             }
             this.allRooms.push(linge);
         }
-        this.bossMap = this.allRooms[this.generateInt(2)][this.generateInt(2)];
+        this.bossMap = this.allRooms[this.generateInt(4)][this.generateInt(4)];
         this.bossMap.isBoss = true;
         this.bossMap.maxMonster = 0;
     }

@@ -42,6 +42,8 @@ class grandfather extends boss {
         this.sprite.animations.add('left', [12,13,14]);
         this.sprite.head.animations.add('left', [19]);
 
+        this.sprite.body.setSize(23, 30, 0, -14);
+        
         this.setDirection();
     }
     update() {
