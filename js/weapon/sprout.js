@@ -13,9 +13,10 @@ class sprout extends Weapon {
     }
     onTouchEnemy(enemy) {
         this.enemyTouch = enemy;
+        enemy.damageReceived(this.damage);
         this.sprite.kill();
         this.touchTime = new Date();
-        this.updateWeaponSpecial = true;
+        //this.updateWeaponSpecial = true;
     }
     genearteSprite( position ) {
         this.sprite = game.add.sprite(position.x, this.direction == 'up' ? position.y-50 :position.y, 'foods');

@@ -3,7 +3,7 @@ class candy extends Weapon {
         super({
             velocity : 3,
             direction : direction,
-            degat : 3,
+            degat : 4,
             rotationSpeed : 4,
         })
         this.sprite = null;

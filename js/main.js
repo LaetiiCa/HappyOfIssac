@@ -17,13 +17,17 @@ game.killAll = function(){
         game.killBoss(game.arrayBoss[i].id);
     }
     for(var i in  game.arrayMonster){
-        console.log(game.arrayMonster[i]);
         game.arrayMonster[i].sprite.kill();
-
         game.killMonster(game.arrayMonster[i].id);
     }
+    for ( var i = 0; i < game.AllItems.length; i++){
+        if (game.AllItems[i] != null){
+            game.AllItems[i].sprite.kill();            
+        }
+    }
+    game.AllItems = [];
 }
-
+game.AllItems = [];
 Object.size = function(obj) {
     var size = 0, key;
     for (key in obj) {

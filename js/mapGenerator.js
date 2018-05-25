@@ -191,7 +191,6 @@ class Map {
             }
             if ( this.porte.down ){
                 if( game.physics.arcade.collide(this.porte.down.sprite ,player.player.body) ){
-                    console.log('Hello');
                     player.player.body.position = {
                         x : game.width /2,
                         y : 100
@@ -259,22 +258,42 @@ class room {
         if (this.isBoss){
             switch (player.level) {
                 case 1 :
+                    var loadingLabel = game.add.text(80,150, 'Boss : BabySister', { font: '50px Courier', fill:'#000'});
+                    setTimeout(function(){
+                        loadingLabel.kill();
+                    },3000);
                     var tmp = new babySister();
                     game.arrayBoss[tmp.id] = tmp;
                     break;
                 case 2 :
+                    var loadingLabel = game.add.text(80,150, 'Boss : Brother', { font: '50px Courier', fill:'#000'});
+                    setTimeout(function(){
+                        loadingLabel.kill();
+                    },3000);
                     var tmp = new brother();
                     game.arrayBoss[tmp.id] = tmp;
                     break;
                 case 3 : 
+                    var loadingLabel = game.add.text(80,150, 'Boss : GrandFather', { font: '50px Courier', fill:'#000'});
+                    setTimeout(function(){
+                        loadingLabel.kill();
+                    },3000);
                     var tmp = new grandfather();
                     game.arrayBoss[tmp.id] = tmp;
                     break;
                 case 4 : 
+                    var loadingLabel = game.add.text(80,150, 'Boss : GrandMother', { font: '50px Courier', fill:'#000'});
+                    setTimeout(function(){
+                        loadingLabel.kill();
+                    },3000);
                     var tmp = new grandmother();
                     game.arrayBoss[tmp.id] = tmp;
                     break;
                 case 5 : 
+                    var loadingLabel = game.add.text(80,150, 'Boss : Father and Mother', { font: '50px Courier', fill:'#000'});
+                    setTimeout(function(){
+                        loadingLabel.kill();
+                    },3000);
                     var tmp = new mother();
                     game.arrayBoss[tmp.id] = tmp;
                     var tmp = new father();
@@ -283,5 +302,10 @@ class room {
                 
             }
         }
+    }
+}
+class generateInRooms {
+    constructor (typePiece){
+
     }
 }

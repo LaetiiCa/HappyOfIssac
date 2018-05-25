@@ -85,9 +85,12 @@ class boss {
             }
         }
         game.killBoss(this.id);
-        player.setLevel(player.level+ 1);
         this.sprite.destroy();
-        player.nextMap();
+        if( Object.size(game.killBoss) == 0 ) {
+            player.setLevel(player.level+ 1);        
+            player.nextMap();
+        }
+       
     }
     generateInt(max){
         return Math.floor(Math.random() * max);

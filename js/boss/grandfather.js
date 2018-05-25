@@ -66,14 +66,14 @@ class grandfather extends boss {
         var tmpX = Math.random();
         var tmpY = Math.random();
         if (tmpX > 0.5 ) {
-            this.sprite.body.velocity.x = 170;
+            this.sprite.body.velocity.x = 200;
         } else {
-            this.sprite.body.velocity.x = -170;
+            this.sprite.body.velocity.x = -200;
         }
         if (tmpY > 0.5 ) {
-            this.sprite.body.velocity.y = 170;
+            this.sprite.body.velocity.y = 200;
         } else {
-            this.sprite.body.velocity.y = -170;
+            this.sprite.body.velocity.y = -200;
         }
     }
     damageReceived(damage) {

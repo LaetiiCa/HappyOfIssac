@@ -52,7 +52,6 @@ class monster {
         this.life = this.life - damage;
         if (this.life <= 0) {
             this.monsterDead();
-            player.drawKill();
         }
         return this.life;
     }
@@ -71,6 +70,56 @@ class monster {
     }
     monsterDead() {
         if ( this.sprite.body != undefined ) {
+        
+            if(this.generateInt(4) == 1){
+                console.log('Salut');
+            switch (this.generateInt(3)){
+                    case 0 : 
+                        var tmp = {
+                            sprite : game.add.sprite(this.sprite.body.position.x, this.sprite.body.position.y, 'pillow'),
+                            addLife : pillow.addLife,
+                        }
+                        game.physics.arcade.enable([tmp.sprite]);
+                        tmp.sprite.animations.add('pillow', [0]);
+                        tmp.sprite.animations.play('pillow');
+                        tmp.sprite.immovable = true;
+                        tmp.sprite.anchor.setTo(0.5,0.5);
+                        tmp.sprite.scale.setTo(0.2,0.2);
+                        tmp.sprite.checkCollision = true;
+                        game.AllItems.push(tmp);
+                        break;
+                    case 1 : 
+                        var tmp = {
+                            sprite : game.add.sprite(this.sprite.body.position.x, this.sprite.body.position.y, 'foods'),
+                            addLife : food.addLife,
+                        }
+                        game.physics.arcade.enable([tmp.sprite]);
+                        tmp.sprite.animations.add('food', [5]);
+                        tmp.sprite.animations.play('food');
+                        tmp.sprite.immovable = true;
+                        tmp.sprite.anchor.setTo(0.5,0.5);
+                        tmp.sprite.scale.setTo(0.5,0.5);                        
+                        tmp.sprite.checkCollision = true;
+                        game.AllItems.push(tmp);
+                        break;
+                    case 2 : 
+                        var tmp = {
+                            sprite : game.add.sprite(this.sprite.body.position.x, this.sprite.body.position.y, 'drug'),
+                            addLife : drug.addLife,
+                        }
+                        game.physics.arcade.enable([tmp.sprite]);
+                        tmp.sprite.animations.add('drug', [0]);
+                        tmp.sprite.animations.play('drug');
+                        tmp.sprite.immovable = true;
+                        tmp.sprite.anchor.setTo(0.5,0.5);
+                        tmp.sprite.scale.setTo(0.3,0.3);                        
+                        tmp.sprite.checkCollision = true;
+                        game.AllItems.push(tmp);
+                        break;
+
+                }
+            }
+
             var explosion = game.add.sprite(this.sprite.body.position.x, this.sprite.body.position.y, "explosion");
             explosion.anchor.setTo(0.3,0.3);
             explosion.scale.setTo(0.7, 0.7);
@@ -83,9 +132,11 @@ class monster {
                     this.playerFixed = false;
                 }
             }
+            player.drawKill();            
         }
         game.killMonster(this.id);
         this.sprite.destroy();
+
     }
     generateInt(max){
         return Math.floor(Math.random() * max);

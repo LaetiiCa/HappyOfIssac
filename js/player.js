@@ -38,12 +38,14 @@ var player = {
         this.character = this.allCharacter[this.sprite];
     },
     setLevel : function(level) {
-        console.log(level);
         this.level = level;
-        var loadingLabel = game.add.text(80,150, "Level next : " + this.level, { font: '30px Courier', fill:'#fff'});
         if (game.state.current != 'load'){
+            var loadingLabel = game.add.text(80,150, "Level next : " + this.level, { font: '50px Courier', fill:'#000'});            
             this.maxLife = 2.50 + (0.5 * this.level);
             this.setLife(this.life + 1 , false);
+            setTimeout(function(){
+                loadingLabel.kill();
+            },5000);
         }
         switch (this.level) {
             case 2 :
@@ -65,15 +67,16 @@ var player = {
                 break;
             
         }
-        setTimeout(function(){
-            loadingLabel.kill();
-        },5000);
+        
     },
     setArmor: function(armor){
         this.armor = armor;
     },
     setLife: function(life, first){
         if ( first ){
+            life = this.maxLife;
+        }
+        if ( life > this.maxLife ){
             life = this.maxLife;
         }
         this.life = life;
@@ -114,7 +117,6 @@ var player = {
         game.state.start('menuStart');
     },
     setAllStuff: function( stuff ){
-        console.log(stuff);
         this.setArms(stuff.arms ? stuff.arms : null);
         this.setHat(stuff.hat ? stuff.hat : null);
         this.setShoes(stuff.shoes ? stuff.shoes : null);
@@ -209,6 +211,7 @@ var player = {
     },
     update : function() {
         game.world.bringToTop(this.lifeSprite);
+        game.world.bringToTop(this.monsterKillSprite);
         this.checkMouv();
         this.checkFire();
         for ( i in this.ballShoot){
@@ -332,7 +335,6 @@ var player = {
         this.map = new Map();
     },
     goToMap: function(map){
-        console.log(game.width);
         game.camera.position = {
             x : map.position.x + 10 ,
             y : map.position.y +10,
@@ -422,6 +424,7 @@ var player = {
             else {
                 var ball = new litleBall(direction, this);
             }
+            game.add.audio('fire').play();
 
             ball.genearteSprite( this.getPosition() );
             this.ballShoot[ball.id] = ball;
