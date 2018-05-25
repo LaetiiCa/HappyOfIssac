@@ -72,7 +72,6 @@ class monster {
         if ( this.sprite.body != undefined ) {
         
             if(this.generateInt(4) == 1){
-                console.log('Salut');
             switch (this.generateInt(3)){
                     case 0 : 
                         var tmp = {

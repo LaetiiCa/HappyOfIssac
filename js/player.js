@@ -39,6 +39,9 @@ var player = {
     },
     setLevel : function(level) {
         this.level = level;
+        if (this.level == 6 ){
+            return this.playerIsWin();
+        }
         if (game.state.current != 'load'){
             var loadingLabel = game.add.text(80,150, "Level next : " + this.level, { font: '50px Courier', fill:'#000'});            
             this.maxLife = 2.50 + (0.5 * this.level);
@@ -107,14 +110,40 @@ var player = {
         game.killAll();
         this.player = undefined;
 
-        game.add.text(80,game.world.height -80, 'press w to menu', { font: '25px Arial', fill :'#000'});
+        game.add.text(80,game.world.height -80, 'press ENTER to menu', { font: '25px Arial', fill :'#000'});
 
-        var wKey = game.input.keyboard.addKey(87);
+        var wKey = game.input.keyboard.addKey(13);
+
+        wKey.onDown.addOnce(this.goToMenu, this);
+    },
+    playerIsWin: function (){
+        var textDead = game.add.text(game.world.centerX, 100, "You are Winner ...", { font: '70px Arial', fill :'#000'});
+        textDead.anchor.setTo(0.5,0.5);
+        var imDead = game.add.sprite(game.world.centerX, game.world.centerY, 'issac');
+        imDead.anchor.setTo(0.5,0.5);
+        imDead.scale.setTo(2,2);
+        imDead.animations.add('dead', [24]);
+        imDead.animations.play('dead',1,false);
+
+        for ( var i in this.ballShoot ){
+            this.destroyBallShoot(this.ballShoot[i]);
+        }
+        for ( var i in this.allCharacter){
+            if ( this.allCharacter[i].player != undefined ){
+                    this.allCharacter[i].killSprite();
+            }
+        }
+        game.killAll();
+        this.player = undefined;
+
+        game.add.text(80,game.world.height -80, 'press ENTER to menu', { font: '25px Arial', fill :'#000'});
+
+        var wKey = game.input.keyboard.addKey(13);
 
         wKey.onDown.addOnce(this.goToMenu, this);
     },
     goToMenu : function(){
-        game.state.start('menuStart');
+        location.reload()
     },
     setAllStuff: function( stuff ){
         this.setArms(stuff.arms ? stuff.arms : null);

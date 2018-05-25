@@ -23,14 +23,13 @@ class Map {
         return Math.floor(Math.random() * max);
     }
     generateAllRooms(){
-        for( var y = 0; y < 3 ; y++){
+        for( var y = 0; y < 4 ; y++){
             var linge = [];
-            for( var x = 0; x < 3; x++){
+            for( var x = 0; x < 4; x++){
                 linge.push(new room(x,y));
             }
             this.allRooms.push(linge);
         }
-
         this.bossMap = this.allRooms[this.generateInt(2)][this.generateInt(2)];
         this.bossMap.isBoss = true;
         this.bossMap.maxMonster = 0;
@@ -235,13 +234,13 @@ class room {
         if ( this.y == 0) {
             this.porte.up = false;
         }
-        else if (this.y ==  2){
+        else if (this.y ==  3){
             this.porte.down = false;
         }
         if ( this.x == 0) {
             this.porte.left = false;
         }
-        else if (this.x ==  2){
+        else if (this.x == 3){
             this.porte.right = false;
         }
     }

@@ -4,7 +4,7 @@ class father extends boss {
         super({
             name : 'father',
             damage : 2.5,
-            life : 30
+            life : 90
         })
     }
     create() {
@@ -43,7 +43,7 @@ class father extends boss {
     }
     moveToPlayerBoss() {
         if ( !this.inAttack ) {
-            game.physics.arcade.moveToObject(this.sprite, player.player.body.body, 100);
+            game.physics.arcade.moveToObject(this.sprite, player.player.body.body, 120);
             var tmpX = this.sprite.body.position.x - player.player.body.body.position.x;
             var tmpY = this.sprite.body.position.y - player.player.body.body.position.y;
             if (this.sprite.body.velocity.y < 0 && (tmpY > 100 || tmpY < -100)) {

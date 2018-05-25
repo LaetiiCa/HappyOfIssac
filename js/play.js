@@ -10,8 +10,10 @@ var playState = {
         game.add.sprite(0,-5,"sol");
         var music = game.add.audio('music_theme');
         music.play();
-        music.onStop = function(){
-            music.play();
+        music.onStop = {
+            dispatch: () => {
+                music.play();
+            }
         }
         game.arrayBoss = {};
         this.player.setLife(3,true);

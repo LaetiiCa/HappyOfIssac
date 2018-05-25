@@ -4,7 +4,7 @@ class mother extends boss {
         super({
             name : 'mother',
             damage: 2.5,
-            life : 30
+            life : 90
         })
     }
     create() {
@@ -26,7 +26,7 @@ class mother extends boss {
         }
     }
     checkAttack(){
-        if((new Date() - this.lastAttack) / 1000 > 5) {
+        if((new Date() - this.lastAttack) / 1000 > 3) {
             this.lastAttack = new Date();
             this.attackMultipe();
         }

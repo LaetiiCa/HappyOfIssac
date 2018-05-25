@@ -26,7 +26,7 @@ class grandmother extends boss {
         }
     }
     checkAttack(){
-        if((new Date() - this.lastAttack) / 1000 > 5) {
+        if((new Date() - this.lastAttack) / 1000 > 3) {
             this.lastAttack = new Date();
             this.attackMultipe();
         }

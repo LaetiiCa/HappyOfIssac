@@ -86,6 +86,7 @@ class boss {
         }
         game.killBoss(this.id);
         this.sprite.destroy();
+        console.log(Object.size(game.killBoss));
         if( Object.size(game.killBoss) == 0 ) {
             player.setLevel(player.level+ 1);        
             player.nextMap();
