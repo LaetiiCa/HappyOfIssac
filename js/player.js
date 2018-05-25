@@ -121,9 +121,9 @@ var player = {
         textDead.anchor.setTo(0.5,0.5);
         var imDead = game.add.sprite(game.world.centerX, game.world.centerY, 'issac');
         imDead.anchor.setTo(0.5,0.5);
-        imDead.scale.setTo(2,2);
-        imDead.animations.add('dead', [24]);
-        imDead.animations.play('dead',1,false);
+        imDead.scale.setTo(4,4);
+        imDead.animations.add('win', [25]);
+        imDead.animations.play('win',1,false);
 
         for ( var i in this.ballShoot ){
             this.destroyBallShoot(this.ballShoot[i]);
@@ -453,7 +453,7 @@ var player = {
             else {
                 var ball = new litleBall(direction, this);
             }
-            game.add.audio('fire').play();
+            //game.add.audio('fire').play();
 
             ball.genearteSprite( this.getPosition() );
             this.ballShoot[ball.id] = ball;

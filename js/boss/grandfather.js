@@ -19,7 +19,7 @@ class grandfather extends boss {
         game.physics.arcade.enable([this.sprite, this.sprite.head]);
         this.sprite.body.checkCollision = true;
         this.sprite.body.collideWorldBounds = true;
-        this.sprite.body.bounce.setTo(1,1);
+        this.sprite.body.bounce.setTo(1.1,1.1);
         this.sprite.head.checkCollision = true;
         this.sprite.head.collideWorldBounds = true;
         this.sprite.head.body.bounce.setTo(1,1);

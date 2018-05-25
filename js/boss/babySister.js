@@ -4,7 +4,8 @@ class babySister extends boss {
         super({
             name : 'babySister',
             damage : 1,
-            life : 10
+            life : 10,
+            velocityArm : 2.3
         })
     }
     create() {
@@ -27,7 +28,7 @@ class babySister extends boss {
         game.physics.arcade.moveToObject(this.sprite, player.player.body.body, 80);
         var tmpX = this.sprite.body.position.x - player.player.body.body.position.x;
         var tmpY = this.sprite.body.position.y - player.player.body.body.position.y;
-        if (tmpX > -160 && tmpX < 160 && tmpY > -160 && tmpY < 160  ) {
+        if (tmpX > -200 && tmpX < 200 && tmpY > -200 && tmpY < 200  ) {
             this.sprite.body.velocity.x = 0;
             this.sprite.body.velocity.y = 0;
             this.sprite.animations.stop(null, true);

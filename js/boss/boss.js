@@ -43,7 +43,7 @@ class boss {
 
 
     checkAttack() {
-        if ((new Date() - this.lastAttack) / 1000 > 1 && this.attackPossible) {
+        if ((new Date() - this.lastAttack) / 1000 > this.velocityArm && this.attackPossible) {
             this.lastAttack = new Date();
             this.attack();
         }
