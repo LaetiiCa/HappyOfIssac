@@ -3,6 +3,11 @@ var game = new Phaser.Game(800, 640,Phaser.AUTO, 'gameDiv');
 game.state.add('boot', bootState);
 game.state.add('load', loadState);
 game.state.add('menuStart', menuState);
+game.state.add('menuMonsters', menuMonsters);
+game.state.add('menuBoss', menuBoss);
+game.state.add('menuLevels', menuLevels);
+game.state.add('menuPersos', menuPersos);
+game.state.add('menuKeys', menuKeys);
 game.state.add('play', playState);
 game.state.start('boot');
 game.killMonster = function(id){

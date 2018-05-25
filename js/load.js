@@ -15,6 +15,14 @@ var loadState = {
         game.load.image('sol', './assets/texture/sol.png');
         game.load.image('floor', './assets/texture/blanc.png');
         game.load.image('nuage', './assets/texture/nuage.png');
+        game.load.image('backgroundMenu', './assets/texture/backgroundMenu.png');
+        game.load.image('monstersMenu', './assets/texture/monsters.png');
+        game.load.image('bossMenu', './assets/texture/boss.png');
+        game.load.image('charactersMenu', './assets/texture/characters.png');
+        game.load.image('keysArrows', './assets/texture/keysArrows.png');
+        game.load.image('keysAE', './assets/texture/ae.png');
+        game.load.image('zqsd', './assets/texture/zqsd.png');
+        game.load.image('charactersMenu', './assets/texture/characters.png');
         game.load.image('porte', './assets/texture/porte.png');
         game.load.atlas('foods', './assets/texture/foods.png', './assets/texture/foods.json');
         game.load.atlas('foods2', './assets/texture/foods2.png', './assets/texture/foods.json');
