@@ -156,49 +156,52 @@ class Map {
 
     update(){
         this.murs.map( mur =>{
-            game.physics.arcade.collide(player.player.body,mur);
-            game.physics.arcade.collide(player.player.head,mur);
+            if (player.player != undefined){
+                game.physics.arcade.collide(player.player.body,mur);
+                game.physics.arcade.collide(player.player.head,mur); 
+            }
+           
         });
-
-        if( Object.size(game.arrayMonster) == 0 ){
-            if ( this.porte.right ){
-                if( game.physics.arcade.collide(this.porte.right.sprite ,player.player.body) ){
-                    player.player.body.position = {
-                        x : 100,
-                        y : game.height / 2
+        if ( player.player != undefined ) {
+            if( Object.size(game.arrayMonster) == 0 ){
+                if ( this.porte.right ){
+                    if( game.physics.arcade.collide(this.porte.right.sprite ,player.player.body) ){
+                        player.player.body.position = {
+                            x : 100,
+                            y : game.height / 2
+                        }
+                        this.nextMap(this.porte.right.map, false);
                     }
-                    this.nextMap(this.porte.right.map, false);
                 }
-            }
-            if ( this.porte.left ){
-                if( game.physics.arcade.collide(this.porte.left.sprite ,player.player.body) ){
-                    player.player.body.position = {
-                        x : game.width - 100,
-                        y : game.height / 2
+                if ( this.porte.left ){
+                    if( game.physics.arcade.collide(this.porte.left.sprite ,player.player.body) ){
+                        player.player.body.position = {
+                            x : game.width - 100,
+                            y : game.height / 2
+                        }
+                        this.nextMap(this.porte.left.map, false);
                     }
-                    this.nextMap(this.porte.left.map, false);
                 }
-            }
-            if ( this.porte.up ){
-                if( game.physics.arcade.collide(this.porte.up.sprite ,player.player.body) ){
-                    player.player.body.position = {
-                        x : game.width / 2,
-                        y : game.height -100
+                if ( this.porte.up ){
+                    if( game.physics.arcade.collide(this.porte.up.sprite ,player.player.body) ){
+                        player.player.body.position = {
+                            x : game.width / 2,
+                            y : game.height -100
+                        }
+                        this.nextMap(this.porte.up.map, false);
                     }
-                    this.nextMap(this.porte.up.map, false);
                 }
-            }
-            if ( this.porte.down ){
-                if( game.physics.arcade.collide(this.porte.down.sprite ,player.player.body) ){
-                    player.player.body.position = {
-                        x : game.width /2,
-                        y : 100
+                if ( this.porte.down ){
+                    if( game.physics.arcade.collide(this.porte.down.sprite ,player.player.body) ){
+                        player.player.body.position = {
+                            x : game.width /2,
+                            y : 100
+                        }
+                        this.nextMap(this.porte.down.map, false);
                     }
-                    this.nextMap(this.porte.down.map, false);
                 }
             }
         }
-
     }
 }
 

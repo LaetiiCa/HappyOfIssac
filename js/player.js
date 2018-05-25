@@ -251,7 +251,7 @@ var player = {
         }
     },
     checkMouv: function (){
-        if ( !this.playerFixed ) {
+        if ( !this.playerFixed && this.player != undefined) {
             var allIsUp = true;
             if ( this.mouv.up ){
                 this.direction = 'up';

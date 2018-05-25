@@ -4,7 +4,7 @@ class mother extends boss {
         super({
             name : 'mother',
             damage: 2.5,
-            life : 90
+            life : 85
         })
     }
     create() {
