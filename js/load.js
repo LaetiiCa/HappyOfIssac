@@ -6,6 +6,7 @@ var loadState = {
         this.loadPerso();
         this.loadMonster();
         this.loadBoss();
+        this.loadItems();
     },
     create: function() {
         game.state.start('menuStart');
@@ -23,6 +24,7 @@ var loadState = {
     },
     loadSound : function() {
         game.load.audio('music_theme', './assets/sound/music_theme.mp3');
+        game.load.audio('fire', './assets/sound/fire.wav');
     },
     loadPerso: function() {
         game.player = player;
@@ -43,5 +45,9 @@ var loadState = {
         game.load.atlas('grandmother', './assets/sprites/grandmother/grandmother.png', './assets/sprites/grandmother/grandmother.json');
         game.load.atlas('mother', './assets/sprites/mother/mother.png', './assets/sprites/mother/mother.json');
         game.load.atlas('father', './assets/sprites/father/father.png', './assets/sprites/father/father.json');
+    },
+    loadItems : function() {
+        game.load.atlas('pillow', pillow.image, pillow.json);
+        game.load.atlas('drug', drug.image, drug.json);
     }
 };

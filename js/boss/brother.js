@@ -25,7 +25,7 @@ class brother extends boss {
     }
     moveToPlayerBoss() {
         if ( !this.inAttack ) {
-            game.physics.arcade.moveToObject(this.sprite, player.player.body.body, 80);
+            game.physics.arcade.moveToObject(this.sprite, player.player.body.body, 110);
             var tmpX = this.sprite.body.position.x - player.player.body.body.position.x;
             var tmpY = this.sprite.body.position.y - player.player.body.body.position.y;
             if (this.sprite.body.velocity.y < 0 && (tmpY > 100 || tmpY < -100)) {

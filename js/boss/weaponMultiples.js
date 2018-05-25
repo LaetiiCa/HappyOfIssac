@@ -30,7 +30,6 @@ class weaponMultiples {
 
     }
     update() {
-        console.log(this.allBall.length);
         for (var i = 0 ; i < this.allBall.length ; i++){
             var sprite = this.allBall[i];
             if (player.player != undefined && (game.physics.arcade.collide(sprite, player.player.body) || game.physics.arcade.collide(sprite, player.player.head)) ){

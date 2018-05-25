@@ -32,10 +32,9 @@ class Alarm extends monster {
             this.weapons[i].update();
         }
     }
+    startBlock() {
+    }
     endBlock() {
-        this.isBlocked = false;
-        this.sprite.animations.play('right', 7, true);
-        this.setDirection();
     }
     setDirection() {
         if (this.sprite.body != undefined) {
